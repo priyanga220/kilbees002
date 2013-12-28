@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ServiceIssue" table="SERVICE_ISSUE">
+        <id name="unitServiceIssueNo" type="string">
+            <column name="UNIT_SERVICE_ISSUE_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="cash" type="string">
+            <column name="CASH" length="20" />
+        </property>
+        <property name="credit" type="string">
+            <column name="CREDIT" length="20" />
+        </property>
+        <property name="paymentType" type="string">
+            <column name="PAYMENT_TYPE" length="20" />
+        </property>
+        <property name="amount" type="string">
+            <column name="AMOUNT" length="20" />
+        </property>
+        <property name="amountTendered" type="string">
+            <column name="AMOUNT_TENDERED" length="20" />
+        </property>
+        <property name="discount" type="string">
+            <column name="DISCOUNT" length="20" />
+        </property>
+        <property name="otherCharge" type="string">
+            <column name="OTHER_CHARGE" length="20" />
+        </property>
+        <property name="isdate" type="date">
+            <column name="ISDATE" length="7" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="20" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="20" />
+        </property>
+        <property name="phUnit" type="string">
+            <column name="PH_UNIT" length="20" />
+        </property>
+        <property name="patientName" type="string">
+            <column name="PATIENT_NAME" length="20" />
+        </property>
+        <property name="cashierSumPrintStatus" type="string">
+            <column name="CASHIER_SUM_PRINT_STATUS" length="20" />
+        </property>
+        <property name="cashierSumPrintDate" type="date">
+            <column name="CASHIER_SUM_PRINT_DATE" length="7" />
+        </property>
+    </class>
+</hibernate-mapping>

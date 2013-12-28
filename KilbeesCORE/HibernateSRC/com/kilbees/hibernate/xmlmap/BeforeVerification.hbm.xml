@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="BeforeVerification" table="BEFORE_VERIFICATION">
+        <composite-id name="id" class="BeforeVerificationId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="beforeVerificationNo" type="string">
+                <column name="BEFORE_VERIFICATION_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="beforeVerificationDate" type="date">
+            <column name="BEFORE_VERIFICATION_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

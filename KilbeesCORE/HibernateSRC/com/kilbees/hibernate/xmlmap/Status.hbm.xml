@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Status" table="STATUS">
+        <id name="statusNo" type="big_decimal">
+            <column name="STATUS_NO" precision="38" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="statusName" type="string">
+            <column name="STATUS_NAME" length="50" not-null="true" />
+        </property>
+        <property name="statusValue" type="big_decimal">
+            <column name="STATUS_VALUE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="statusDescription" type="string">
+            <column name="STATUS_DESCRIPTION" length="50" not-null="true" />
+        </property>
+        <property name="lastValue" type="big_decimal">
+            <column name="LAST_VALUE" precision="38" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

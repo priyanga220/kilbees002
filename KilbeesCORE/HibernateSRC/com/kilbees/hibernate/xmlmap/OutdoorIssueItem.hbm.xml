@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="OutdoorIssueItem" table="OUTDOOR_ISSUE_ITEM">
+        <composite-id name="id" class="OutdoorIssueItemId">
+            <key-property name="outdoorInvoiceNo" type="string">
+                <column name="OUTDOOR_INVOICE_NO" length="20" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+            <key-property name="grnNo" type="string">
+                <column name="GRN_NO" length="20" />
+            </key-property>
+            <key-property name="directionNo" type="string">
+                <column name="DIRECTION_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="directions" class="Directions" update="false" insert="false" fetch="select">
+            <column name="DIRECTION_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="outdoorPatientIssue" class="OutdoorPatientIssue" update="false" insert="false" fetch="select">
+            <column name="OUTDOOR_INVOICE_NO" length="20" not-null="true" />
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="double">
+            <column name="QUANTITY" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="totalWeight" type="big_decimal">
+            <column name="TOTAL_WEIGHT" precision="10" not-null="true" />
+        </property>
+        <property name="discountRate" type="big_decimal">
+            <column name="DISCOUNT_RATE" precision="10" />
+        </property>
+        <property name="netAmount" type="big_decimal">
+            <column name="NET_AMOUNT" precision="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

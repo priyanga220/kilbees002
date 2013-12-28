@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PharmacyUnitLog" table="PHARMACY_UNIT_LOG">
+        <composite-id name="id" class="PharmacyUnitLogId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="pharmacyUnitLogNo" type="big_decimal">
+                <column name="PHARMACY_UNIT_LOG_NO" precision="38" scale="0" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="identityCode" type="string">
+            <column name="IDENTITY_CODE" length="200" not-null="true" />
+        </property>
+        <property name="lastValue" type="string">
+            <column name="LAST_VALUE" length="200" not-null="true" />
+        </property>
+        <property name="pharmacyUnitLogDate" type="date">
+            <column name="PHARMACY_UNIT_LOG_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="identityCode1" type="string">
+            <column name="IDENTITY_CODE1" length="200" />
+        </property>
+        <property name="logDescription" type="string">
+            <column name="LOG_DESCRIPTION" length="200" />
+        </property>
+        <property name="related" type="string">
+            <column name="RELATED" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

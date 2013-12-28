@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="UnitToken" table="UNIT_TOKEN">
+        <composite-id name="id" class="UnitTokenId">
+            <key-property name="unitNo" type="string">
+                <column name="UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="tokenNo" type="big_decimal">
+                <column name="TOKEN_NO" precision="38" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="cosmpType" type="big_decimal">
+            <column name="COSMP_TYPE" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

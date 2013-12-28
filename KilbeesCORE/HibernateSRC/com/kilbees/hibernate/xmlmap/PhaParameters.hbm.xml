@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PhaParameters" table="PHA_PARAMETERS">
+        <composite-id name="id" class="PhaParametersId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="parameterNo" type="big_decimal">
+                <column name="PARAMETER_NO" precision="38" scale="0" />
+            </key-property>
+            <key-property name="parameterName" type="string">
+                <column name="PARAMETER_NAME" length="50" />
+            </key-property>
+        </composite-id>
+        <property name="prefixValue" type="string">
+            <column name="PREFIX_VALUE" length="20" not-null="true" />
+        </property>
+        <property name="nextValue" type="big_decimal">
+            <column name="NEXT_VALUE" precision="38" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

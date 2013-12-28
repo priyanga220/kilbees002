@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PharmacyValuation" table="PHARMACY_VALUATION">
+        <id name="recordCode" type="big_decimal">
+            <column name="RECORD_CODE" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="unitNo" type="string">
+            <column name="UNIT_NO" length="20" not-null="true" />
+        </property>
+        <property name="category" type="string">
+            <column name="CATEGORY" length="20" not-null="true" />
+        </property>
+        <property name="costTotal" type="big_decimal">
+            <column name="COST_TOTAL" precision="20" not-null="true" />
+        </property>
+        <property name="retailTotal" type="big_decimal">
+            <column name="RETAIL_TOTAL" precision="20" not-null="true" />
+        </property>
+        <property name="valueDate" type="date">
+            <column name="VALUE_DATE" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

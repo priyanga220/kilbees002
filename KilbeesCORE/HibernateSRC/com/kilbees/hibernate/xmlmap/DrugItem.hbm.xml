@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="DrugItem" table="DRUG_ITEM">
+        <id name="itemNo" type="string">
+            <column name="ITEM_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="drugCategory" class="DrugCategory" fetch="select">
+            <column name="CATEGORY_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="genericName" type="string">
+            <column name="GENERIC_NAME" length="100" not-null="true" />
+        </property>
+        <property name="tradeName" type="string">
+            <column name="TRADE_NAME" length="100" not-null="true" />
+        </property>
+        <property name="weight" type="string">
+            <column name="WEIGHT" length="20" />
+        </property>
+        <property name="grnMeasQuantity" type="big_decimal">
+            <column name="GRN_MEAS_QUANTITY" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="issueMeasUnit" type="string">
+            <column name="ISSUE_MEAS_UNIT" length="20" not-null="true" />
+        </property>
+        <property name="assetType" type="big_decimal">
+            <column name="ASSET_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="drugType" type="big_decimal">
+            <column name="DRUG_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="margin" type="java.lang.Double">
+            <column name="MARGIN" precision="126" scale="0" />
+        </property>
+        <property name="itemRegisteredDate" type="date">
+            <column name="ITEM_REGISTERED_DATE" length="7" not-null="true" />
+        </property>
+        <property name="currentStatus" type="big_decimal">
+            <column name="CURRENT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="oldCode" type="string">
+            <column name="OLD_CODE" length="20" />
+        </property>
+        <property name="retailMargine" type="java.lang.Double">
+            <column name="RETAIL_MARGINE" precision="126" scale="0" />
+        </property>
+        <property name="useType" type="big_decimal">
+            <column name="USE_TYPE" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="patientIssueReturnItems" table="PATIENT_ISSUE_RETURN_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ITEM_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PatientIssueReturnItem" />
+        </set>
+        <set name="tempQuantities" table="TEMP_QUANTITY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ITEM_CODE" length="20" not-null="true" />
+            </key>
+            <one-to-many class="TempQuantity" />
+        </set>
+    </class>
+</hibernate-mapping>

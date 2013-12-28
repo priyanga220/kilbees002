@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+		
+		<!-- Enable Annotation Based Configuration (Autowire)  -->
+		<context:annotation-config/>
+		
+		
+		<!-- Enable Annotation Based Configuration(Autowire + Autodescovery)   
+		<context:component-scan base-package="com.kilbees"></context:component-scan>
+		-->
+		<!-- Inserting Values from A Property file -->
+		<!--  <context:property-placeholder location="classpath:jdbc.properties" /> -->
+		
+		<!-- Get jndi db resource from GF server -->
+		
+
+<!--
+		<bean name="kilbeesjndidatasrc" class="org.springframework.jndi.JndiObjectFactoryBean">
+    		<property name="jndiName">
+        		<value>jdbc/_kilbees</value>
+    		</property>
+		</bean>
+		
+		
+		
+		  OR
+			<jee:jndi-lookup id="kilbeesjndidatasrc" jndi-name="jdbc/_kilbees" expected-type="javax.sql.DataSource" />
+    	
+		
+		
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			
+			<property name="dataSource" ref="kilbeesjndidatasrc"/>
+			
+			<property name="packagesToScan">
+       			<list>
+           			<value>com.kilbees.bussiness.model</value>
+       			</list>
+    		</property>
+		 
+		<property name="hibernateProperties">
+			<props>
+
+		 		<prop key="hibernate.hbm2ddl.auto">update</prop>
+
+		    <prop key="hibernate.show_sql">true</prop>
+	    
+				<
+			    <prop key="hibernate.connection.autocommit">true</prop>
+	         	<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</prop>
+	            <prop key="hibernate.connection.url">jdbc:oracle:thin:@10.10.10.25:1521:aixis</prop>
+	            <prop key="hibernate.connection.username">zzz</prop>
+	            <prop key="hibernate.connection.password">zzz</prop>
+	            >
+
+            </props>
+            
+            
+		</property>
+	</bean>
+		
+	-->
+		
+	<bean id="duke" class="com.springinaction.springidol.Juggler"/>
+	
+	<bean id="duke2" class="com.springinaction.springidol.Juggler">
+		<constructor-arg value="15"/>
+	</bean>
+	
+	<bean id="sonnet29" class="com.springinaction.springidol.Sonnet29"/>
+	
+	<bean id="poeticDuke" class="com.springinaction.springidol.PoeticJuggler">
+		<constructor-arg value="15"/>
+		<constructor-arg ref="sonnet29"/>
+	</bean>
+	<!-- Going with static factory method-->
+	<bean id="theStage" class="com.springinaction.springidol.Stage" factory-method="getInstance" />
+	
+	<!-- Scope  - Default : singleton / prototype , request , session , global-session -->
+	<bean id="ticket" class="com.springinaction.springidol.Ticket" scope="prototype"/>
+	
+	<!-- Init & Destroy methods @ Been Creation and Destroy -->
+	<bean id="auditorium" class="com.springinaction.springidol.Auditorium" init-method="turnOnLights" destroy-method="turnOffLights"/>
+
+	<!-- 
+			An optional way to define init and destroy methods for a bean is to write the bean
+			class to implement Spring’s InitializingBean and DisposableBean interfaces.
+			The Spring container treats beans that implement these interfaces in a special way
+			by allowing them to hook into the bean lifecycle. InitializingBean declares an
+			afterPropertiesSet() method that serves as the init method. As for Disposable-
+			Bean, it declares a destroy() method that gets called when a bean is removed from
+			the application context.
+	-->
+	<!-- If many of the beans in a context definition file will have initialization or destroy
+		methods with the same name, you don’t have to declare init-method or destroy-
+		method on each individual bean. Instead you can take advantage of the default-
+		init-method and default-destroy-method attributes on the <beans> element:
+		
+			<?xml version="1.0"encoding="UTF-8"?>
+			<beans xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+			default-init-method="turnOnLights"
+			default-destroy-method="turnOffLights">...
+			</beans> 
+	-->
+
+	<!-- Setter Injection-->
+	<bean id="kenny1" class="com.springinaction.springidol.Instrumentalist">
+		<property name="song" value="JingleBells"/>
+	</bean>
+	
+	
+	<bean id="saxophone" class="com.springinaction.springidol.Saxophone"/>
+	
+	<!-- Setter Injection : References-->
+	<bean id="kenny2" class="com.springinaction.springidol.Instrumentalist">
+		<property name="song" value="JingleBells"/>
+		<property name="instrument" ref="saxophone"/>
+	</bean>
+	
+	<bean id="piano" class="com.springinaction.springidol.Piano"/>
+	
+	<bean id="kenny3" class="com.springinaction.springidol.Instrumentalist">
+		<property name="song" value="JingleBells"/>
+		<property name="instrument" ref="piano" />
+	</bean>
+
+
+	<!-- Injecting Inner Beans / Setter , Constructor for both can-->
+	
+	<bean id="kenny4" class="com.springinaction.springidol.Instrumentalist">
+		<property name="song" value="JingleBells"/>
+		<property name="instrument">
+			<bean class="com.springinaction.springidol.Saxophone"/> 
+		</property>
+	</bean>
+	
+	<!-- Wiring Collections : List & Set - java.util.Collection / Map - java.util.Map / Prop - java.util.Properties  -->
+	
+	<bean id="guitar" class="com.springinaction.springidol.Guitar"/>
+	
+	<bean id="hank1" class="com.springinaction.springidol.OneManBand">
+		<property name="instruments">
+			<list> <!-- Collection<Instrument> instruments; : Can be used with  : java.util.List<Instrument> instruments; / Instrument[] instruments; -->
+				<ref bean="guitar"/>  <!-- <list> / <value> / <bean> / <null/> -->
+				<ref bean="piano"/>
+				<ref bean="saxophone"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="hank2" class="com.springinaction.springidol.OneManBand">
+		<property name="instruments">
+			<set>
+				<ref bean="guitar"/>  <!-- <set> / <value> / <bean> / <null/> -->
+				<ref bean="piano"/>
+				<ref bean="saxophone"/>
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="hank3" class="com.springinaction.springidol.OneManBand2">
+		<property name="instruments">
+			<map>
+				<entry key="GUITAR" value-ref="guitar"/>
+				<entry key="PIANO" value-ref="piano"/>
+				<entry key="SAXOPHONO" value-ref="saxophone"/>
+				
+				<!-- 	key 		Specifies the key of the map entry as a String
+						key-ref 	Specifies the key of the map entry as a reference to a bean in the Spring context
+						value 		Specifies the value of the map entry as a String
+						value-ref 	Specifies the value of the map entry as a reference to a bean in the Spring co 
+				-->
+			</map>
+		</property>
+	</bean>
+	
+	<!-- WIRING PROPERTIES COLLECTIONS -->
+	
+	<!-- Java Code : 
+		private Properties instruments;
+		public void setInstruments(Properties instruments)
+		{
+			this.instruments=instruments;
+		}
+ 	-->
+ 	<!-- Bean Def:
+ 	
+ 		<bean id="hank" class="com.springinaction.springidol.OneManBand">
+			<property name="instruments">
+				<props>
+					<propkey="GUITAR">STRUM STRUM STRUM</prop>
+					<propkey="PIANO">CRASH CRASH CRASH</prop>
+					<propkey="SAXOPHONO">HUM HUM HUM</prop>
+				</props>
+			</property>
+		</bean>
+		
+		<property> 		is the element used to inject a value or bean reference into a property of a bean class.
+ 		<props> 		is the element used to define a collection value of type java.util.Properties.
+ 		<prop>  		is the element used to define a member of a <props> collection.
+ 	 
+ 	 -->
+	
+	
+	<!-- Wiring null
+	
+		<property name="someNonNullProperty"><null/></property>
+	 -->
+	 
+	 <!-- Spring Expression Language : SPEL ============================ -->
+	 
+	 <!-- 
+	 	<property name="count" value="#{5}"/>
+	 
+	 	<property name="message"value="The value is #{5}"/>
+	 	
+	 	<property name="frequency" value="#{89.7}"/>
+	 	
+	 	<property name="capacity" value="#{1e4}"/> // 10000.0
+	 	
+	 	<property name="name" value="#{'Chuck'}"/>
+	 	
+	 	<property name='name' value='#{"Chuck"}'/>
+	 	
+	 	<property name="enabled" value="#{false}"/> // boolean
+	 	
+	 	// REFERENCING BEANS, PROPERTIES, AND METHODS
+	 	
+	 	<property name="instrument" value="#{saxophone}"/>  // by Bean ID
+	 	
+	 	<property name="instrument" ref="saxophone"/> //  by Bean ID
+	 	
+	 	//use a bean reference to access the properties of the bean
+	 	
+	 	<bean id="carl" class="com.springinaction.springidol.Instrumentalist">
+			<property name="song" value="#{kenny.song}"/>   // kenny is a bean ID 
+		</bean>
+		
+		In java : Instrumentalist carl=new Instrumentalist();
+		carl.setSong(kenny.getSong());
+		
+		// Use Bean reference to call methods
+		
+		<bean id="carl" class="com.springinaction.springidol.Instrumentalist">
+			<property name="song" value="#{songSelector.selectSong()}"/>  //  songSelector  is a bean ID , selectSong() is its method
+		</bean>
+		
+		// Uppr case
+		
+		<property name="song" value="#{songSelector.selectSong().toUpperCase()}"/>
+		
+		//the null-safe accessor
+		
+		<property name="song" value="#{songSelector.selectSong()?.toUpperCase()}"/>
+		
+		// WORKING WITH TYPES
+		
+		<property name="multiplier" value="#{T(java.lang.Math).PI}"/>
+		
+		<propertyname="randomNumber"value="#{T(java.lang.Math).random()}"/>
+		
+		
+		/// Performing operations on SpEL values
+		
+		<property name="adjustedAmount" value="#{counter.total + 42}"/>
+		<property name="adjustedAmount" value="#{counter.total-20}"/>
+		<property name="circumference" value="#{2 *T(java.lang.Math).PI * circle.radius}"/>
+		<property name="average" value="#{counter.total / counter.count}"/>
+		<property name="remainder" value="#{counter.total % counter.count}"/>
+		
+		// Str concat
+		
+		<property name="fullName" value="#{performer.firstName + ' ' + performer.lastName}"/>
+		
+		<property name="equal" value="#{counter.total == 100}"/>
+		
+		// ambiguity of < and >
+		
+		<property name="hasCapacity" value="#{counter.total le 100000}"/>  // eq , le, lt, gt, ge 
+		
+		// and , or, not or !
+		
+		<property name="largeCircle" value="#{shape.kind =='circle' and shape.perimeter gt 10000}"/>
+		
+		//ternary
+		
+		<property name="instrument" value="#{songSelector.selectSong() == 'JingleBells' ? piano : saxophone}"/>
+		
+		<property name="song" value="#{kenny.song != null ? kenny.song :'Greensleeves'}"/>
+		
+		 same
+		 
+		 <property name="song" value="#{kenny.song?:'Greensleeves'}"/>
+		 =========================================================
+		  --> 
+		  
+ <!--  
+		 Autowiring 
+		 =========================================
+		//by name	 
+	
+		<bean id="instrument" class="com.springinaction.springidol.Saxophone"/>
+		
+		<bean id="kenny" class="com.springinaction.springidol.Instrumentalist" autowire="byName">
+			<propertyname="song"value="JingleBells"/>
+		</bean>
+ --> 
+	
+	<bean id="instrument" class="com.springinaction.springidol.Saxophone"/>
+	
+	<bean id="autowirekenny" class="com.springinaction.springidol.Instrumentalist" autowire="byName">
+			<property name="song" value="JingleBells"/>
+		</bean>
+		
+	<!-- 
+	// AUTOWIRING BY TYPE
+	
+		<bean id="instrument" class="com.springinaction.springidol.Saxophone"/>
+	
+	<bean id="autowirekenny" class="com.springinaction.springidol.Instrumentalist" autowire="byType">
+			<property name="song" value="JingleBells"/>
+		</bean>
+		
+		But there’s a limitation to autowiring by type. What happens if Spring finds more
+	than one bean whose type is assignable to the autowired property? In such a case,
+	Spring isn’t going to guess which bean to autowire and will instead throw an excep-
+	tion. Consequently, you’re allowed to have only one bean configured that matches the
+	autowired property.
+	
+	Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'autowirekennybytype' defined in class path resource [spring-hibernate-configuration.xml]: Unsatisfied dependency expressed through bean property 'instrument': : No qualifying bean of type [com.springinaction.springidol.Instrument] is defined: expected single matching bean but found 4: saxophone,piano,guitar,instrument; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [com.springinaction.springidol.Instrument] is defined: expected single matching bean but found 4: saxophone,piano,guitar,instrument
+
+	To identify a primary autowire candidate, you’ll work with the <bean> element’s primary attribute
+	But here’s the weird side of the primary attribute: it defaults to true.
+	
+	<bean id="saxophone" class="com.springinaction.springidol.Saxophone" primary="false"/>
+	
+		The primary attribute is only useful for identifying a preferred autowire candidate. If
+	you’d rather eliminate some beans from consideration when autowiring, then you can
+	set their autowire-candidate attribute to false, as follows:
+	
+	<bean id="saxophone" class="com.springinaction.springidol.Saxophone" autowire-candidate="false"/>
+	
+	//AUTOWIRING CONSTRUCTORS
+	
+	<bean id="duke" class="com.springinaction.springidol.PoeticJuggler" autowire="constructor"/>
+	
+		Autowiring by constructor shares the same limitations as byType. Spring won’t
+	attempt to guess which bean to autowire when it finds multiple beans that match a constructor’s arguments. Furthermore, if a class has multiple constructors, any of which
+	can be satisfied by autowiring, Spring won’t attempt to guess which constructor to use.
+	
+	//AUTODETECT AUTOWIRING
+	
+	autodetect—Attempts to apply constructor autowiring first. If that fails, byType will be tried.
+	
+	<bean id="duke" class="com.springinaction.springidol.PoeticJuggler" autowire="autodetect"/>
+	
+			When a bean has been configured to autowire by autodetect, Spring will attempt to
+	autowire by constructor first. If a suitable constructor-to-bean match can’t be found,
+	then Spring will attempt to autowire by type.
+	
+	//DEFAULT AUTOWIRING
+	
+	<?xml version="1.0"encoding="UTF-8"?>
+	<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-autowire="byType">
+	
+	</beans>
+	
+	
+	//Mixing auto with explicit wiring
+	
+	<bean id="kenny" class="com.springinaction.springidol.Instrumentalist" autowire="byType">
+		<propertyname="song"value="JingleBells"/>
+		<propertyname="instrument"ref="saxophone"/>
+	</bean>
+	
+	<bean id="kenny" class="com.springinaction.springidol.Instrumentalist" autowire="byType">
+		<propertyname="song"value="JingleBells"/>
+		<propertyname="instrument"><null/></property>
+	</bean>
+	
+	One final note on mixed wiring: when using constructor autowiring, you must let
+	Spring wire all of the constructor arguments—you can’t mix <constructor-arg> elements with constructor autowiring.
+	
+	//Wiring with annotations
+	
+		Annotation wiring isn’t turned on in the Spring container by default. So, before we
+	can use annotation-based autowiring, we’ll need to enable it in our Spring configura-
+	tion. The simplest way to do that is with the <context:annotation-config> element
+	from Spring’s context configuration namespace:
+	
+	<?xml version="1.0"encoding="UTF-8"?>
+		<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+		
+		<context:annotation-config/>
+		
+		 //beandeclarationsgohere
+		</beans>
+		
+		
+	//@Autowired
+	
+	//in java class
+	@Autowired public void setInstrument(Instrument instrument)
+	{
+		this.instrument=instrument;
+	}
+	
+		Now you can get rid of the <property> element that wires the Instrumentalist with
+	an instrument. When Spring sees that you’ve annotated setInstrument() with
+	@Autowired it’ll try to perform byType autowiring on the method.
+	 -->
+	 
+	 <bean id="annotatedautowirekenny" class="com.springinaction.springidol.AnnotatedInstrumentalist">
+			<property name="song" value="Annotated JingleBells"/>
+	</bean>
+	
+	<!-- 
+				What’s especially interesting about @Autowired is that you don’t have to use it with
+		a setter method. You can use it on any method to automatically wire in bean references:
+		
+		@Autowired
+		public voidheresYourInstrument(Instrumentinstrument)
+		{
+			this.instrument=instrument;
+		}
+		
+		The @Autowired annotation can even be used on constructors:
+		
+		@Autowired
+		public Instrumentalist(Instrumentinstrument)
+		{
+			this.instrument=instrument;
+		}
+		
+		What’s more, you can directly annotate properties and do away with the setter methods altogether:
+		
+		@Autowired
+		private Instrumentinstrument
+		
+		If no bean can be wired into the @Autowired-annotated property or argument, then autowiring fails (with a nasty NoSuchBeanDefinitionException)
+
+		//OPTIONAL AUTOWIRING
+		
+		@Autowired(required=false)
+		private Instrument instrument;
+		
+				Here, Spring will try to wire the instrument property. But if no bean of type
+		Instrument can be found, then no problem. The property will be left null.
+		
+				Note that the required attribute can be used anywhere @Autowired can be used.
+		But when used with constructors, only one constructor can be annotated with
+		@Autowired and required set to true. All other @Autowired-annotated constructors
+		must have required set to false. Moreover, when multiple constructors are anno-
+		tated with @Autowired, Spring will choose the constructor which has the most argu-
+		ments that can be satisfied.
+		
+		//QUALIFYING AMBIGUOUS DEPENDENCIES
+		
+		@Autowired
+		@Qualifier("guitar")
+		private Instrumentinstrument;
+		
+		As shown here, the @Qualifier annotation will try to wire in a bean whose ID matches guitar.
+		
+				In addition to narrowing by a bean’s ID, it’s also possible to narrow by a qualifier
+		that’s applied to a bean itself. For example, suppose that the guitar bean were
+		declared in XML as follows:
+		
+				<bean class="com.springinaction.springidol.Guitar">
+					<qualifiervalue="stringed"/>
+				</bean>
+				
+		Here the <qualifier> element qualifies the guitar bean as a stringed instrument.
+		
+		But instead of specifying the qualifier in XML, you could have also annotated the
+		Guitar class itself with the @Qualifier annotation:
+		
+		@Qualifier("stringed")
+		public classGuitarimplementsInstrument
+		{
+		
+		}
+		
+		//CREATING CUSTOM QUALIFIERS
+		
+		package com.springinaction.springidol.qualifiers;
+		import java.lang.annotation.ElementType;
+		import java.lang.annotation.Retention;
+		import java.lang.annotation.RetentionPolicy;
+		import java.lang.annotation.Target;
+		import org.springframework.beans.factory.annotation.Qualifier;
+		
+		@Target({ElementType.FIELD,ElementType.PARAMETER,ElementType.TYPE})
+		@Retention(RetentionPolicy.RUNTIME)
+		@Qualifier
+		public @interfaceStringedInstrument
+		{
+		
+		}
+		
+		With the @StringedInstrument annotation defined, you can now use it instead of @Qualifier to annotate Guitar:
+		
+		@StringedInstrument
+		public classGuitarimplementsInstrument{
+		}
+		
+		Then, you can qualify the @Autowiredinstrument property with @StringedInstrument:
+		@Autowired
+		@StringedInstrument
+		private Instrumentinstrument;
+	 -->
+	 
+	 <bean id="StringedQualifiedInstrument" class="com.springinaction.springidol.QualifiedInstrument"></bean>
+	 
+	 <!-- 
+	 
+	 //Applying standards-based autowiring with @Inject
+	 
+		@Inject
+		private Instrument instrument;
+		
+		Just like @Autowired, @Inject can be used to autowire properties, methods, and con-
+		structors. Unlike @Autowired, @Inject doesn’t have a required attribute. Therefore,
+		@Inject-annotated dependencies are expected to be fulfilled, failing with an excep-
+		tion if they’re not.
+		
+				Rather than inject a reference directly, you could ask @Inject to inject a Provider.
+		The Provider interface enables, among other things, lazy injection of bean refer-
+		ences and injection of multiple instances of a bean.
+		
+		For example, let’s say you have a KnifeJuggler class that needs to be injected with
+		one or more instances of Knife. 
+		
+		Assuming that the Knife bean is declared as having
+		prototype scope, the following KnifeJuggler constructor will be able to retrieve five
+		Knife beans:
+		
+		private Set<Knife>knives;
+		
+		@Inject
+		public KnifeJuggler(Provider<Knife>knifeProvider)
+		{
+			knives =newHashSet<Knife>();
+			for(inti=0;i<5; i++) 
+			{
+				knives.add(knifeProvider.get());
+			}
+		}
+
+	  -->
+	  
+	  <bean id="Knife" class="com.springinaction.springidol.Knife"></bean>
+	  
+	  <!-- 
+	  //QUALIFYING @INJECTED PROPERTIES
+	  
+			  @Inject’s answer to
+		the @Qualifier annotation is the @Named annotation.
+		
+		@Inject
+		@Named("guitar")
+		private Instrument instrument;
+		
+		@Named specifically identifies a selected bean by its ID.
+		
+		//Using expressions with annotation injection
+		
+		@Value("Eruption")
+		private Stringsong;
+		
+		@Value("#{systemProperties.myFavoriteSong}")
+		private String song;
+		
+			Now @Value shows its stuff. It’s not just a courier of static values—it’s an effective,
+		annotation-driven method of wiring dynamically evaluated SpEL expressions.
+		
+		=====================================================================================
+		
+		
+	   -->
+	   
+	   <!-- 
+	   		AUTODISCOVERY   Automatically discovering beans
+	   		===============================================
+	   		
+	   		To configure Spring for autodiscovery, use <context:component-scan> instead of
+			<context:annotation-config>:
+			
+			<beans xmlns="http://www.springframework.org/schema/beans"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:context="http://www.springframework.org/schema/context"
+			xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+			
+			<context:component-scan base-package="com.springinaction.springidol"> </context:component-scan>
+			
+			</beans>
+	   
+				   		The <context:component-scan> element works by scanning a package and all of its
+			subpackages, looking for classes that could be automatically registered as beans in the
+			Spring container. The base-package attribute tells <context:component-scan> the
+			package to start its scan from.
+			
+				So, how does <context:component-scan> know which classes to register as Spring
+			beans?
+			
+			By default, <context:component-scan> looks for classes that are annotated with one
+			of a handful of special stereotype annotations:
+			
+			1. @Component—A general-purpose stereotype annotation indicating that the class is a Spring component
+			2. @Controller—Indicates that the class defines a Spring MVC controller
+			3. @Repository—Indicates that the class defines a data repository
+			4. @Service—Indicates that the class defines a service
+			5. Any custom annotation that is itself annotated with @Component
+			
+			package com.springinaction.springidol;
+			import org.springframework.stereotype.Component;
+			
+			@Component
+			public classGuitarimplementsInstrument
+			{
+				public voidplay()
+				{
+					System.out.println("Strumstrumstrum");
+				}
+			}
+			
+			By default, the bean’s ID will be generated by camel-casing the class name. In the case of
+			Guitar that means that the bean ID will be guitar.
+			
+			or we can do ass below
+			
+			@Component("ID we want")
+	    -->
+	    
+	    <!-- 
+	    //== ASPECT ORIENTED PROGRAMMING
+	    
+	    //Spring leverages AspectJ’s pointcut expression language for defining Spring aspects.
+	    
+	    args() 			Limits join point matches to the execution of methods whose arguments are
+		instances of the given types
+		
+		@args() 		Limits join point matches to the execution of methods whose arguments are
+		annotated with the given annotation types
+		
+		execution() 	Matches join points that are method executions
+		
+		this() 			Limits join point matches to those where the bean reference of the AOP proxy is
+		of a given type
+		
+		target() 		Limits join point matches to those where the target object is of a given type
+		
+		@target() 		Limits matching to join points where the class of the executing object has an
+		annotation of the given type
+		
+		within() 		Limits matching to join points within certain types
+		
+		@within() 		Limits matching to join points within types that have the given annotation (the
+		execution of methods declared in types with the given annotation when using Spring AOP)
+		
+		@annotation 	Limits join point matches to those where the subject of the join point has the
+		given annotation
+		
+		
+		//Writing pointcuts
+		
+		// exact no parameter
+		execution(* com.springinaction.springidol.Instrument.play())
+		
+		
+		//any parameter
+		execution(* com.springinaction.springidol.Instrument.play())
+		
+		execution(* com.springinaction.springidol.Instrument.play()) and bean(eddie)
+		
+		// or (||) , not (!)
+		
+		execution(*com.springinaction.springidol.Instrument.play()) and !bean(eddie)
+		
+		//Declaring aspects in XML
+		
+		//Spring’s AOP configuration elements simplify declaration of POJO-based aspects.
+		
+		AOP 						configuration element Purpose
+		
+		<aop:advisor> 				Defines an AOP advisor.
+		<aop:after> 				Defines an AOP after advice (regardless of whether the advised method returns successfully).
+		<aop:after-returning> 		Defines an AOP after-returning advice.
+		<aop:after-throwing> 		Defines an AOP after-throwing advice.
+		<aop:around> 				Defines an AOP around advice.
+		<aop:aspect> 				Defines an aspect.
+		<aop:aspectj-autoproxy> 	Enables annotation-driven aspects using @AspectJ.
+		<aop:before> 				Defines an AOP before advice.
+		<aop:config> 				The top-level AOP element. Most <aop:*> elements must be contained within <aop:config>.
+		<aop:declare-parents> Introduces additional interfaces to advised objects that are transparently implemented.
+		<aop:pointcut> Defines a pointcut
+		
+		
+	     -->
+	     
+	     <bean id="audience" class="com.springinaction.springidol.AOP_Audience"/>
+	     
+	     <!-- 
+	     //Declaring before and after advice
+	     
+	     <aop:config>
+			<aop:aspect ref="audience">
+				<aop:before pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="takeSeats"/>
+				<aop:before pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="turnOffCellPhones"/>
+				<aop:after-returning pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="applaud"/>
+				<aop:after-throwing pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="demandRefund"/>
+			</aop:aspect>
+		</aop:config>
+		
+	      -->
+	      
+	       <aop:config>
+			<aop:aspect ref="audience">
+				<aop:before pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="takeSeats"/>
+				<aop:before pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="turnOffCellPhones"/>
+				<aop:after-returning pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="applaud"/>
+				<aop:after-throwing pointcut= "execution(* com.springinaction.springidol.Performer.perform(..))" method="demandRefund"/>
+			</aop:aspect>
+		</aop:config>
+		
+		<!-- 
+		//Defining a named pointcut to eliminate redundant pointcut definitions
+		
+		<aop:config>
+			<aop:aspectref="audience">
+				<aop:pointcutid="performance"expression= "execution(* com.springinaction.springidol.Performer.perform(..))" />
+				
+				<aop:before pointcut-ref="performance" method="takeSeats" />
+				
+				<aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+				
+				<aop:after-returning pointcut-ref="performance" method="applaud" />
+				
+				<aop:after-throwing pointcut-ref="performance" method="demandRefund" />
+			</aop:aspect>
+		</aop:config>
+		
+		 -->
+	      <aop:config>
+			<aop:aspect ref="audience">
+				<aop:pointcut id="performance" expression= "execution(* com.springinaction.springidol.Performer.perform(..))" />
+				
+				<aop:before pointcut-ref="performance" method="takeSeats" />
+				
+				<aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+				
+				<aop:after-returning pointcut-ref="performance" method="applaud" />
+				
+				<aop:after-throwing pointcut-ref="performance" method="demandRefund" />
+			</aop:aspect>
+		</aop:config>
+		
+		<!-- 
+		
+		//Declaring around advice
+		
+		//The watchPerformance() method provides AOP around advice.
+		
+		public voidwatchPerformance(ProceedingJoinPointjoinpoint)
+		{
+			try 
+			{
+				System.out.println("Theaudienceistakingtheirseats.");
+				System.out.println("Theaudienceisturningofftheircellphones");
+				longstart=System.currentTimeMillis();
+				joinpoint.proceed();
+				longend=System.currentTimeMillis(); System.out.println("CLAPCLAPCLAPCLAPCLAP");
+				System.out.println("Theperformancetook"+(end-start) + "milliseconds.");
+			} 
+			catch(Throwablet)
+			{
+				System.out.println("Boo!Wewantourmoneyback!");
+			}
+		} 
+		
+		//Defining a named pointcut to eliminate redundant pointcut definitions
+		
+		<aop:config>
+			<aop:aspect ref="audience2">
+			
+				<aop:pointcut id="performance2"expression= "execution(* com.springinaction.springidol.Performer.perform(..))" />
+				
+				<aop:around pointcut-ref="performance2" method="watchPerformance"/>
+				
+			</aop:aspect>
+		</aop:config>
+		
+		-->
+		<bean id="audience2" class="com.springinaction.springidol.AOP_Audeince2"></bean>
+		<aop:config>
+			<aop:aspect ref="audience2">
+			
+				<aop:pointcut id="performance2" expression= "execution(* com.springinaction.springidol.Performer.perform(..))" />
+				
+				<aop:around pointcut-ref="performance2" method="watchPerformance"/>
+				
+			</aop:aspect>
+		</aop:config>
+		
+		<!-- 
+		//Passing parameters to advice
+		
+		package com.springinaction.springidol;
+		public interface MindReader
+		{
+			void interceptThoughts(Stringthoughts);
+			String getThoughts();
+		}
+		
+		//
+		
+		package com.springinaction.springidol;
+		public class Magician implements MindReader
+		{
+			privateStringthoughts;
+			public void interceptThoughts(Stringthoughts)
+			{
+				System.out.println("Interceptingvolunteer'sthoughts");
+				this.thoughts=thoughts;
+			}
+			public String getThoughts()
+			{
+				returnthoughts;
+			}
+		}
+		
+		//
+		package com.springinaction.springidol;
+		public interface	Thinker
+		{
+			void thinkOfSomething(Stringthoughts);
+		}
+		
+		//
+		
+		package com.springinaction.springidol;
+		public class Volunteer implements Thinker
+		{
+			private String thoughts;
+			public void thinkOfSomething(Stringthoughts)
+			{
+				this.thoughts=thoughts;
+			}
+			public String getThoughts()
+			{
+				return thoughts;
+			}
+		}
+		
+		//
+		
+		<aop:config>
+			<aop:aspect ref="magician">
+				<aop:pointcut id="thinking" expression="execution(* com.springinaction.springidol.Thinker.thinkOfSomething(String)) and args(thoughts)"/>
+				<aop:before pointcut-ref="thinking" method="interceptThoughts" arg-names="thoughts" />
+			</aop:aspect>
+		</aop:config>
+		
+		//
+		
+		@Test
+		public void magicianShouldReadVolunteersMind()
+		{
+			volunteer.thinkOfSomething("QueenofHearts");
+			assertEquals("QueenofHearts",magician.getThoughts());
+		}
+		
+		
+		//Introducing new functionality with aspects
+		
+		package com.springinaction.springidol;
+		
+		public interface Contestant
+		{
+			void receiveAward();
+		}
+		
+		<aop:aspect>
+			<aop:declare-parents types-matching="com.springinaction.springidol.Performer implement-interface="com.springinaction.springidol.Contestant"
+			default-impl="com.springinaction.springidol.GraciousContestant"
+			/>
+		</aop:aspect>
+		 -->
+		 
+		 <!-- 
+		 =======
+		 //ANNOTATING ASPECTS
+		 
+		 //Aspectj 5  = @AspectJ
+		 package com.springinaction.springidol;
+		import org.aspectj.lang.annotation.AfterReturning;
+		import org.aspectj.lang.annotation.AfterThrowing;
+		import org.aspectj.lang.annotation.Aspect;
+		import org.aspectj.lang.annotation.Before;
+		import org.aspectj.lang.annotation.Pointcut;
+		
+		@Aspect
+		public classAudience
+		{
+			@Pointcut( "execution(* com.springinaction.springidol.Performer.perform(..))")
+			public voidperformance()
+			{
+			}
+			
+			@Before("performance()")
+			public voidtakeSeats()
+			{
+				System.out.println("Theaudienceistakingtheirseats.");
+			}
+			
+			@Before("performance()")
+			public voidturnOffCellPhones()
+			{
+				System.out.println("Theaudienceisturningofftheircellphones");
+			}
+			
+			@AfterReturning("performance()")
+			public voidapplaud()
+			{
+				System.out.println("CLAPCLAPCLAPCLAPCLAP");
+			}
+			
+			@AfterThrowing("performance()")
+			public voiddemandRefund()
+			{
+				System.out.println("Boo!Wewantourmoneyback!");
+			}
+		}
+		
+		//Then You must declare an autoproxy bean in the Spring context that knows how to
+turn @AspectJ-annotated beans into proxy advice.
+For that purpose, Spring comes with an autoproxy creator class called Annotation-
+AwareAspectJAutoProxyCreator. You could register an AnnotationAware-
+AspectJAutoProxyCreator as a <bean> in the Spring context
+
+Instead, to simplify that
+rather long name, Spring also provides a custom configuration element in the aop
+namespace that’s much easier to remember:
+
+<aop:aspectj-autoproxy/>
+		  -->
+
+<aop:aspectj-autoproxy/>
+
+<!-- 
+//Annotating around advice
+
+//java class
+
+	@Around("performance()")
+	public void watchPerformance(ProceedingJoinPointjoinpoint)
+	{
+		try 
+		{
+			System.out.println("Theaudienceistakingtheirseats.");
+			
+			System.out.println("Theaudienceisturningofftheircellphones");
+			
+			longstart=System.currentTimeMillis();
+			
+			joinpoint.proceed();
+			
+			longend=System.currentTimeMillis();
+			
+			System.out.println("CLAPCLAPCLAPCLAPCLAP");
+			
+			System.out.println("Theperformancetook"+(end-start) + "milliseconds.");
+		} 
+		catch(Throwablet)
+		{
+			System.out.println("Boo!Wewantourmoneyback!");
+		}
+	}
+	
+	
+	//Using @AspectJ annotations to turn a Magician into an aspect
+	
+	package com.springinaction.springidol;
+	import org.aspectj.lang.annotation.Aspect;
+	import org.aspectj.lang.annotation.Before;
+	import org.aspectj.lang.annotation.Pointcut;
+	
+	@Aspect
+	public classMagicianimplementsMindReader
+	{
+	privateStringthoughts;
+		@Pointcut("execution(* com.springinaction.springidol"Thinker.thinkOfSomething(String)) && args(thoughts)")
+		public voidthinking(Stringthoughts)
+		{
+		
+		}
+		
+		@Before("thinking(thoughts)")
+		public void interceptThoughts(Stringthoughts)
+		{
+			System.out.println("Interceptingvolunteer'sthoughts:"+thoughts);
+			this.thoughts=thoughts;
+		}
+		public StringgetThoughts()
+		{
+			returnthoughts;
+		}
+	}
+	
+	====================================================================
+ -->
+ 
+ <!-- DATA ACCESS ============================ -->
+ <!-- 
+ //Getting to know Spring’s data access exception hierarchy
+ 
+	 	On one hand, JDBC’s exception hierarchy is too generic—it’s not really much of a
+	hierarchy at all. On the other hand, Hibernate’s exception hierarchy is proprietary to
+	Hibernate. What we need is a hierarchy of data access exceptions that are descriptive
+	but not directly associated with a specific persistence framework.
+
+ //SPRING’S PERSISTENCE PLATFORM-AGNOSTIC EXCEPTIONS
+ 
+ Spring JDBC provides a hierarchy of data access exceptions that solve both problems.
+ 
+ //JDBC’s exception hierarchy versus Spring’s data access exceptions
+ 
+ JDBC’s exceptions  		Spring’s data access exceptions
+ 
+BatchUpdateException			CannotAcquireLockException
+DataTruncation 					CannotSerializeTransactionException
+SQLException 					CleanupFailureDataAccessException
+SQLWarning 						ConcurrencyFailureException
+														DataAccessException(ROOT)
+								DataAccessResourceFailureException
+								DataIntegrityViolationException
+								DataRetrievalFailureException
+								DeadlockLoserDataAccessException
+								EmptyResultDataAccessException
+								IncorrectResultSizeDataAccessException
+								IncorrectUpdateSemanticsDataAccessException
+								InvalidDataAccessApiUsageException
+								InvalidDataAccessResourceUsageException
+								OptimisticLockingFailureException
+								PermissionDeniedDataAccessException
+								PessimisticLockingFailureException
+								TypeMismatchDataAccessException
+								UncategorizedDataAccessException
+								
+What makes DataAccessException special is that it’s an
+unchecked exception. In other words, you don’t have to catch any of the data access
+exceptions thrown from Spring (although you’re perfectly welcome to if you’d like).
+
+To take advantage of Spring’s data access exceptions, you must use one of Spring’s
+supported data access templates.
+
+(Scenario = flight luggage)
+This mirrors a powerful design pattern: the Template Method pattern.
+
+This is the same pattern that Spring applies to data access. No matter what technology we’re using, certain data access steps are required.
+
+Spring separates the fixed and variable parts of the data access process into two dis-
+tinct classes: templates and callbacks. Templates manage the fixed part of the process,
+whereas your custom data access code is handled in the callbacks.
+
+//Spring comes with several data access templates, each suitable for a different persistence
+mechanism.
+
+Template class (org.springframework.*) 			Used to template. . .
+jca.cci.core.CciTemplate 							JCA CCI connections
+
+jdbc.core.JdbcTemplate 								JDBC connections
+
+jdbc.core.namedparam.NamedParameterJdbcTemplate 	JDBC connections with support for
+													named parameters
+													
+jdbc.core.simple.SimpleJdbcTemplate 				JDBC connections, simplified with
+													Java 5 constructs
+													
+orm.hibernate.HibernateTemplate 					Hibernate 2.x sessions
+orm.hibernate3.HibernateTemplate 					Hibernate 3.x sessions
+
+orm.ibatis.SqlMapClientTemplate 					iBATIS SqlMap clients
+
+orm.jdo.JdoTemplate 								Java Data Object implementations
+
+orm.jpa.JpaTemplate 								Java Persistence API entity managers
+
+
+//Using DAO support classes = Template based
+
+//Spring's DAO support classes provide convenient access to their corresponding data access
+template.
+
+DAO support class (org.springframework.*) 				Provides DAO support for
+
+jca.cci.support.CciDaoSupport 								JCA CCI connections
+
+jdbc.core.support.JdbcDaoSupport 							JDBC connections
+
+jdbc.core.namedparam.NamedParameterJdbcDaoSupport 			JDBC connections with support for named parameters
+
+jdbc.core.simple.SimpleJdbcDaoSupport 						JDBC connections, simplified with Java 5 constructs
+
+orm.hibernate.support.HibernateDaoSupport 					Hibernate 2.x sessions 
+
+orm.hibernate3.support.HibernateDaoSupport 					Hibernate 3.x sessions
+
+orm.ibatis.support.SqlMapClientDaoSupport 					iBATIS SqlMap clients
+
+orm.jdo.support.JdoDaoSupport 								Java Data Object implementations
+
+orm.jpa.support.JpaDaoSupport 								Java Persistence API entity managers
+
+
+first things first—most of Spring’s persistence support options will depend on
+a data source. So, before we can get started with creating templates and DAOs, we
+need to configure Spring with a data source for the DAOs to access the database.
+
+//Configuring a data source
+
+	Data sources that are defined by a JDBC driver
+  	Data sources that are looked up by JNDI
+ 	Data sources that pool connections
+ 
+ //Using JNDI data sources
+ 
+ The
+<jee:jndi-lookup> element from Spring’s jee namespace makes it possible to
+retrieve any object, including data sources, from JNDI and make it available as a
+Spring bean.
+
+	<jee:jndi-lookup id="dataSource" jndi-name="/jdbc/SpitterDS" resource-ref="true"/>
+	
+	if the application is running within a Java application server, then
+you’ll want to set the resource-ref property to true so that the value given in jndi-
+name will be prepended with java:comp/env/.
+
+
+//Using a pooled data source
+
+Although Spring doesn’t provide a pooled
+data source, there’s a suitable one available in the Jakarta Commons Database Con-
+nection Pooling (DBCP) project (http://jakarta.apache.org/commons/dbcp).
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+		<property name="url" value="jdbc:hsqldb:hsql://localhost/spitter/spitter"/>
+		<property name="username" value="sa"/>
+		<property name="password" value=""/>
+		<property name="initialSize" value="5"/>
+		<property name="maxActive" value="10"/>
+	</bean>
+	
+
+//JDBC driver-based data source
+
+  DriverManagerDataSource : Returns a new connection every time that a con-
+nection is requested. Unlike DBCP’s BasicDataSource, the connections provided
+by DriverManagerDataSource aren’t pooled.
+
+  SingleConnectionDataSource : Returns the same connection every time a
+connection is requested. Although SingleConnectionDataSource isn’t exactly
+a pooled data source, you can think of it as a data source with a pool of exactly
+one connection.
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+		<property name="url" value="jdbc:hsqldb:hsql://localhost/spitter/spitter"/>
+		<property name="username" value="sa"/>
+		<property name="password" value=""/>
+	</bean>
+	
+	
+	neither DriverManagerDataSource nor Single-
+ConnectionDataSource provides a connection pool, there are no pool configuration
+properties to set.
+
+
+//Working with JDBC templates
+
+For JDBC, Spring comes with three template classes to
+choose from:
+  JdbcTemplate : The most basic of Spring’s JDBC templates, this class provides
+simple access to a database through JDBC and simple indexed-parameter queries.
+
+  NamedParameterJdbcTemplate : This JDBC template class enables you to per-
+form queries where values are bound to named parameters in SQL, rather than
+indexed parameters.
+
+  SimpleJdbcTemplate : This version of the JDBC template takes advantage of
+Java 5 features such as autoboxing, generics, and variable parameter lists to sim-
+plify how a JDBC template is used.
+
+// SimpleJdbcTemplate is the best choice
+  -->
+
+<bean id="dataSource_Pooled" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@10.10.10.25:1521:aixis"/>
+		<property name="username" value="EHOS"/>
+		<property name="password" value="oraclexe"/>
+		<property name="initialSize" value="5"/>
+		<property name="maxActive" value="10"/>
+</bean>
+
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+	<constructor-arg ref="dataSource_Pooled"/>
+</bean>
+
+<bean id="spitterDao" class="com.habuma.spitter.JdbcSpitterDAO">
+	<property name="jdbcTemplate" ref="jdbcTemplate"/>
+</bean>
+
+<!-- 
+	//USING SPRING’S DAO SUPPORT CLASSES FOR JDBC
+	
+	//java dao
+	public classJdbcSpitterDao extends SimpleJdbcDaoSupport implements SpitterDao
+	{
+		public voidaddSpitter(Spitterspitter)
+		{
+			getSimpleJdbcTemplate().update(SQL_INSERT_SPITTER,
+			spitter.getUsername(),
+			spitter.getPassword(),
+			spitter.getFullName(),
+			spitter.getEmail(),
+			spitter.isUpdateByEmail());
+			spitter.setId(queryForIdentity());
+		}
+	}
+	
+	<bean id="spitterDao" class="com.habuma.spitter.persistence.classJdbcSpitterDao">
+		<propertyname="dataSource"ref="dataSource"/>
+	</bean>
+	
+	=============================
+ -->
+	
+<!-- =========== // Hibernate  -->
+<!-- 
+	In the previous section we looked at how to work with JDBC through Spring’s JDBC
+templates. As it turns out, Spring’s support for Hibernate offers a similar template
+class to abstract Hibernate persistence. Historically, HibernateTemplate was the way
+to work with Hibernate in a Spring application. Like its JDBC counterpart, Hibernate-
+Template took care of the intricacies of working with Hibernate by catching Hiber-
+nate-specific exceptions and rethrowing them as one of Spring’s unchecked data
+access exceptions.
+One of the responsibilities of HibernateTemplate is to manage Hibernate
+Sessions. This involves opening and closing sessions as well as ensuring one session
+per transaction. Without HibernateTemplate, you’d have no choice but to clutter
+your DAOs with boilerplate session management code.
+The downside of HibernateTemplate is that it’s somewhat intrusive. When we use
+Spring’s HibernateTemplate in a DAO (whether directly or through HibernateDao-
+Support), the DAO class is coupled to the Spring API. Although this may not be of
+much concern to some developers, others may find Spring’s intrusion into their DAO
+code undesirable.
+Even though HibernateTemplate is still around, it’s no longer considered the best
+way of working with Hibernate. Contextual sessions, introduced in Hibernate 3, are a
+way in which Hibernate itself manages one Session per transaction. There’s no need
+for HibernateTemplate to ensure this behavior. This keeps your DAO classes free of
+Spring-specific code.
+Since contextual sessions are the accepted best practice for working with Hiber-
+nate, we’ll focus on them and not spend any more time on HibernateTemplate. If
+you’re still curious about HibernateTemplate and want to see how it works, I refer you
+to the second edition of this book or to the example code that can be downloaded
+from http://www.manning.com/walls4/, where I include a HibernateTemplate
+example.
+Before we dive into working with Hibernate’s contextual sessions, we need to set
+the stage for Hibernate by configuring a Hibernate session factory in Spring.
+ -->
+	
+	
+</beans>

@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="OutdoorPatientIssue" table="OUTDOOR_PATIENT_ISSUE">
+        <composite-id name="id" class="OutdoorPatientIssueId">
+            <key-property name="outdoorInvoiceNo" type="string">
+                <column name="OUTDOOR_INVOICE_NO" length="20" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="patientName" type="string">
+            <column name="PATIENT_NAME" length="100" />
+        </property>
+        <property name="companyNo" type="string">
+            <column name="COMPANY_NO" length="100" />
+        </property>
+        <property name="doctorNo" type="string">
+            <column name="DOCTOR_NO" length="50" />
+        </property>
+        <property name="outdoorIssueDate" type="date">
+            <column name="OUTDOOR_ISSUE_DATE" length="7" not-null="true" />
+        </property>
+        <property name="outdoorDeliveryDate" type="date">
+            <column name="OUTDOOR_DELIVERY_DATE" length="7" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="discountAmount" type="big_decimal">
+            <column name="DISCOUNT_AMOUNT" precision="10" />
+        </property>
+        <property name="issuePaymentType" type="big_decimal">
+            <column name="ISSUE_PAYMENT_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="issueStatus" type="big_decimal">
+            <column name="ISSUE_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="cashierPrintStatus" type="big_decimal">
+            <column name="CASHIER_PRINT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="outdoorPatientType" type="big_decimal">
+            <column name="OUTDOOR_PATIENT_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="creditStatus" type="big_decimal">
+            <column name="CREDIT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="tokenNo" type="big_decimal">
+            <column name="TOKEN_NO" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="totalWeight" type="big_decimal">
+            <column name="TOTAL_WEIGHT" precision="10" not-null="true" />
+        </property>
+        <property name="cashPayment" type="big_decimal">
+            <column name="CASH_PAYMENT" precision="38" />
+        </property>
+        <property name="cardPayment" type="big_decimal">
+            <column name="CARD_PAYMENT" precision="38" />
+        </property>
+        <property name="otherCharge" type="big_decimal">
+            <column name="OTHER_CHARGE" precision="38" />
+        </property>
+        <property name="bankId" type="string">
+            <column name="BANK_ID" length="25" />
+        </property>
+        <property name="creditCardNumber" type="string">
+            <column name="CREDIT_CARD_NUMBER" length="20" />
+        </property>
+        <property name="injectionCharge" type="big_decimal">
+            <column name="INJECTION_CHARGE" precision="38" />
+        </property>
+        <property name="cashierPrintDate" type="date">
+            <column name="CASHIER_PRINT_DATE" length="7" />
+        </property>
+        <property name="accId" type="string">
+            <column name="ACC_ID" length="10" not-null="true" />
+        </property>
+        <property name="points" type="double">
+            <column name="POINTS" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="custId" type="string">
+            <column name="CUST_ID" length="10" not-null="true" />
+        </property>
+        <property name="bedCharge" type="big_decimal">
+            <column name="BED_CHARGE" precision="38" scale="0" />
+        </property>
+        <property name="theatreCharge" type="big_decimal">
+            <column name="THEATRE_CHARGE" precision="38" scale="0" />
+        </property>
+        <property name="centralizedState" type="big_decimal">
+            <column name="CENTRALIZED_STATE" precision="38" />
+        </property>
+        <property name="cardHolder" type="string">
+            <column name="CARD_HOLDER" length="100" />
+        </property>
+        <set name="outdoorIssueItems" table="OUTDOOR_ISSUE_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OUTDOOR_INVOICE_NO" length="20" not-null="true" />
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="OutdoorIssueItem" />
+        </set>
+    </class>
+</hibernate-mapping>

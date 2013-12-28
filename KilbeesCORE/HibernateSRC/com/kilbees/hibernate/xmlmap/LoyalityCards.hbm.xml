@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="LoyalityCards" table="LOYALITY_CARDS">
+        <id name="cardNo" type="string">
+            <column name="CARD_NO" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="cardName" type="string">
+            <column name="CARD_NAME" length="50" not-null="true" />
+        </property>
+        <property name="cardType" type="big_decimal">
+            <column name="CARD_TYPE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="regDate" type="date">
+            <column name="REG_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="minLimit" type="java.lang.Double">
+            <column name="MIN_LIMIT" precision="126" scale="0" />
+        </property>
+        <property name="maxLimit" type="java.lang.Double">
+            <column name="MAX_LIMIT" precision="126" scale="0" />
+        </property>
+        <set name="custPointSpendses" table="CUST_POINT_SPENDS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CARD_NO" length="10" not-null="true" />
+            </key>
+            <one-to-many class="CustPointSpends" />
+        </set>
+        <set name="cardRateses" table="CARD_RATES" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CARD_NO" length="10" not-null="true" />
+            </key>
+            <one-to-many class="CardRates" />
+        </set>
+    </class>
+</hibernate-mapping>

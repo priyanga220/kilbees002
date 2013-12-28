@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="TestPhService" table="TEST_PH_SERVICE">
+        <composite-id name="id" class="TestPhServiceId">
+            <key-property name="phUnitId" type="string">
+                <column name="PH_UNIT_ID" length="20" />
+            </key-property>
+            <key-property name="serviceId" type="string">
+                <column name="SERVICE_ID" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_ID" length="20" not-null="true" />
+        </many-to-one>
+        <property name="serviceDisc" type="string">
+            <column name="SERVICE_DISC" length="20" />
+        </property>
+        <property name="activeStatus" type="big_decimal">
+            <column name="ACTIVE_STATUS" precision="22" scale="0" />
+        </property>
+        <property name="minVal" type="string">
+            <column name="MIN_VAL" length="20" />
+        </property>
+    </class>
+</hibernate-mapping>

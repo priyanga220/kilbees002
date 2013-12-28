@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Doctors" table="DOCTORS">
+        <id name="docNo" type="string">
+            <column name="DOC_NO" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="title" type="string">
+            <column name="TITLE" length="20" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="200" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="200" />
+        </property>
+        <property name="specialization" type="string">
+            <column name="SPECIALIZATION" length="100" />
+        </property>
+        <property name="homeTele" type="string">
+            <column name="HOME_TELE" length="30" />
+        </property>
+        <property name="officeTele" type="string">
+            <column name="OFFICE_TELE" length="30" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="15" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="200" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="70" />
+        </property>
+        <property name="status" type="java.lang.Byte">
+            <column name="STATUS" precision="2" scale="0" />
+        </property>
+        <property name="txndate" type="date">
+            <column name="TXNDATE" length="7" />
+        </property>
+        <property name="txnUser" type="string">
+            <column name="TXN_USER" length="30" />
+        </property>
+        <property name="doctorType" type="java.lang.Byte">
+            <column name="DOCTOR_TYPE" precision="2" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

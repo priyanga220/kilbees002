@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
+		
+		<!-- Enable Annotation Based Configuration (Autowire)  -->
+		<context:annotation-config/>
+		
+		<!-- Enable Annotation Based Configuration(Autowire + Autodescovery)   -->
+		<context:component-scan base-package="com.kilbees"></context:component-scan>
+		
+		<!-- Get jndi db resource from GF server  / JBoss 7.1 server-->
+		<!--	-->
+		<bean name="kilbeesjndidatasrc" class="org.springframework.jndi.JndiObjectFactoryBean">
+    		<property name="jndiName">
+        	 <value>java:jboss/jdbc/_kilbees</value>  
+        	 <!--  	<value>jdbc/_kilbees</value>  -->
+    		</property>
+		</bean>
+		
+		
+		
+		<!--  OR
+			<jee:jndi-lookup id="kilbeesjndidatasrc" jndi-name="jdbc/_kilbees" expected-type="javax.sql.DataSource" />
+    	-->
+		
+		
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+			
+		<!--    -->	<property name="dataSource" ref="kilbeesjndidatasrc"/> 
+			
+			<property name="packagesToScan">
+       			<list>
+           			<value>com.kilbees.bussiness.model</value>
+       			</list>
+    		</property>
+		 
+		<property name="hibernateProperties">
+			<props>
+
+		 		
+
+		    	<prop key="hibernate.show_sql">true</prop>
+	    		<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9iDialect</prop>
+	    		
+				
+			    <prop key="hibernate.connection.autocommit">true</prop>
+	           <!--  	
+				<prop key="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</prop>
+	            <prop key="hibernate.connection.url">jdbc:oracle:thin:@127.0.0.1:1521:xe</prop>
+	            <prop key="hibernate.connection.username">EHOS</prop>
+	            <prop key="hibernate.connection.password">oraclexe</prop>
+	     
+	        	<prop key="hibernate.hbm2ddl.auto">update</prop>
+	           -->
+
+            </props>
+            
+            
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+
+
+</beans>

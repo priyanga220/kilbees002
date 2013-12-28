@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PurchaseOrder" table="PURCHASE_ORDER">
+        <composite-id name="id" class="PurchaseOrderId">
+            <key-property name="purchaseOrderNo" type="string">
+                <column name="PURCHASE_ORDER_NO" length="20" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" fetch="select">
+            <column name="UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="supplier" class="Supplier" update="false" insert="false" fetch="select">
+            <column name="SUP_NO" length="20" not-null="true" />
+            <column name="UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="purchaseOrderType" type="big_decimal">
+            <column name="PURCHASE_ORDER_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="purchaseOrderDate" type="date">
+            <column name="PURCHASE_ORDER_DATE" length="7" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="createUserId" type="string">
+            <column name="CREATE_USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="createUserIp" type="string">
+            <column name="CREATE_USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="approvedUserId" type="string">
+            <column name="APPROVED_USER_ID" length="20" />
+        </property>
+        <property name="approvedUserIp" type="string">
+            <column name="APPROVED_USER_IP" length="15" />
+        </property>
+        <property name="approvedDate" type="date">
+            <column name="APPROVED_DATE" length="7" />
+        </property>
+        <property name="netAmount" type="big_decimal">
+            <column name="NET_AMOUNT" precision="15" />
+        </property>
+        <property name="aboutConsmp" type="big_decimal">
+            <column name="ABOUT_CONSMP" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="poStatus" type="big_decimal">
+            <column name="PO_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <set name="grns" table="GRN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PURCHASE_ORDER_NO" length="20" not-null="true" />
+                <column name="UNIT_NO_PO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="Grn" />
+        </set>
+        <set name="purchaseOrderItems" table="PURCHASE_ORDER_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PURCHASE_ORDER_NO" length="20" not-null="true" />
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PurchaseOrderItem" />
+        </set>
+    </class>
+</hibernate-mapping>

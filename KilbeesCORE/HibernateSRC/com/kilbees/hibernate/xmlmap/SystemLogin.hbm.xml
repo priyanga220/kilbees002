@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="SystemLogin" table="SYSTEM_LOGIN">
+        <id name="userName" type="string">
+            <column name="USER_NAME" length="50" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="theme" class="Theme" fetch="select">
+            <column name="THEME_CODE" length="5" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="200" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="200" not-null="true" />
+        </property>
+        <property name="userType" type="big_decimal">
+            <column name="USER_TYPE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="txnUser" type="string">
+            <column name="TXN_USER" length="50" not-null="true" />
+        </property>
+        <property name="txnIp" type="string">
+            <column name="TXN_IP" length="50" not-null="true" />
+        </property>
+        <property name="txnDate" type="date">
+            <column name="TXN_DATE" length="7" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="accessId" type="string">
+            <column name="ACCESS_ID" length="100" not-null="true" />
+        </property>
+        <property name="securityCode" type="string">
+            <column name="SECURITY_CODE" length="100" />
+        </property>
+        <set name="systemUserFunctionses" table="SYSTEM_USER_FUNCTIONS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_NAME" length="50" not-null="true" />
+            </key>
+            <one-to-many class="SystemUserFunctions" />
+        </set>
+        <set name="systemUserUnits" table="SYSTEM_USER_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_NAME" length="50" not-null="true" />
+            </key>
+            <one-to-many class="SystemUserUnit" />
+        </set>
+    </class>
+</hibernate-mapping>

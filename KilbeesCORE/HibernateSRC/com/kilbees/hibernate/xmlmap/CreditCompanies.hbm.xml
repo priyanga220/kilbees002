@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="CreditCompanies" table="CREDIT_COMPANIES">
+        <composite-id name="id" class="CreditCompaniesId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="id" type="string">
+                <column name="ID" length="10" />
+            </key-property>
+            <key-property name="opdInword" type="byte">
+                <column name="OPD_INWORD" precision="2" scale="0" />
+            </key-property>
+        </composite-id>
+        <property name="name" type="string">
+            <column name="NAME" length="200" unique="true" />
+        </property>
+        <property name="address1" type="string">
+            <column name="ADDRESS1" length="200" />
+        </property>
+        <property name="tele" type="string">
+            <column name="TELE" length="30" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="15" />
+        </property>
+        <property name="creditLimit" type="big_decimal">
+            <column name="CREDIT_LIMIT" precision="20" />
+        </property>
+        <property name="status" type="java.lang.Byte">
+            <column name="STATUS" precision="2" scale="0" />
+        </property>
+        <property name="regDate" type="date">
+            <column name="REG_DATE" length="7" />
+        </property>
+        <property name="regUser" type="string">
+            <column name="REG_USER" length="30" />
+        </property>
+        <property name="address2" type="string">
+            <column name="ADDRESS2" length="200" />
+        </property>
+        <property name="address3" type="string">
+            <column name="ADDRESS3" length="200" />
+        </property>
+        <property name="collector" type="string">
+            <column name="COLLECTOR" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

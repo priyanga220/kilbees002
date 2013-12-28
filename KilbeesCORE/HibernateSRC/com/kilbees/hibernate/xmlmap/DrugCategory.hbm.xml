@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="DrugCategory" table="DRUG_CATEGORY">
+        <id name="categoryNo" type="string">
+            <column name="CATEGORY_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="categoryName" type="string">
+            <column name="CATEGORY_NAME" length="50" not-null="true" />
+        </property>
+        <property name="billingCategory" type="string">
+            <column name="BILLING_CATEGORY" length="50" not-null="true" />
+        </property>
+        <set name="drugItems" table="DRUG_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CATEGORY_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DrugItem" />
+        </set>
+    </class>
+</hibernate-mapping>

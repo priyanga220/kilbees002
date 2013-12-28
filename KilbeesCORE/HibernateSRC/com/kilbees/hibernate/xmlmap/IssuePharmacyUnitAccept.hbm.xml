@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="IssuePharmacyUnitAccept" table="ISSUE_PHARMACY_UNIT_ACCEPT">
+        <composite-id name="id" class="IssuePharmacyUnitAcceptId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="acceptNo" type="string">
+                <column name="ACCEPT_NO" length="20" />
+            </key-property>
+            <key-property name="issueReturnNo" type="string">
+                <column name="ISSUE_RETURN_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="fromUnitNo" type="string">
+            <column name="FROM_UNIT_NO" length="20" not-null="true" />
+        </property>
+        <property name="acceptType" type="big_decimal">
+            <column name="ACCEPT_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="acceptDate" type="date">
+            <column name="ACCEPT_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

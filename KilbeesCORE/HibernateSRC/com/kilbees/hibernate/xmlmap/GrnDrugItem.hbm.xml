@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="GrnDrugItem" table="GRN_DRUG_ITEM">
+        <composite-id name="id" class="GrnDrugItemId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="grnNo" type="string">
+                <column name="GRN_NO" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+            <key-property name="batchNo" type="string">
+                <column name="BATCH_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="grn" class="Grn" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+            <column name="GRN_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="quantity" type="double">
+            <column name="QUANTITY" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="expDate" type="date">
+            <column name="EXP_DATE" length="7" not-null="true" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="netAmount" type="big_decimal">
+            <column name="NET_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="costPrice" type="big_decimal">
+            <column name="COST_PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="retailPrice" type="big_decimal">
+            <column name="RETAIL_PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="packSize" type="big_decimal">
+            <column name="PACK_SIZE" precision="22" scale="0" />
+        </property>
+        <property name="bonusQty" type="java.lang.Double">
+            <column name="BONUS_QTY" precision="22" scale="0" />
+        </property>
+        <property name="billCost" type="big_decimal">
+            <column name="BILL_COST" precision="10" />
+        </property>
+        <property name="dayBefEx" type="date">
+            <column name="DAY_BEF_EX" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
