@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="GrnEdit" table="GRN_EDIT">
+        <composite-id name="id" class="GrnEditId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="grnEditNo" type="string">
+                <column name="GRN_EDIT_NO" length="20" />
+            </key-property>
+            <key-property name="grnNo" type="string">
+                <column name="GRN_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="grnEditDate" type="date">
+            <column name="GRN_EDIT_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

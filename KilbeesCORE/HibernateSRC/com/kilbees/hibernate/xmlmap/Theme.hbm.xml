@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Theme" table="THEME">
+        <id name="themeId" type="string">
+            <column name="THEME_ID" length="5" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="50" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="200" not-null="true" />
+        </property>
+        <set name="systemLogins" table="SYSTEM_LOGIN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="THEME_CODE" length="5" not-null="true" />
+            </key>
+            <one-to-many class="SystemLogin" />
+        </set>
+    </class>
+</hibernate-mapping>

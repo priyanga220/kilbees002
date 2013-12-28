@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="DrugItemPharmacyUnit" table="DRUG_ITEM_PHARMACY_UNIT">
+        <composite-id name="id" class="DrugItemPharmacyUnitId">
+            <key-property name="unitNo" type="string">
+                <column name="UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="supplier" class="Supplier" fetch="select">
+            <column name="SUP_NO" length="20" not-null="true" />
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="rol" type="double">
+            <column name="ROL" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="roq" type="double">
+            <column name="ROQ" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="currentStatus" type="big_decimal">
+            <column name="CURRENT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="drugType" type="big_decimal">
+            <column name="DRUG_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="margin" type="java.lang.Double">
+            <column name="MARGIN" precision="126" scale="0" />
+        </property>
+        <set name="itemMovements" table="ITEM_MOVEMENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO_ITEM" length="20" not-null="true" />
+                <column name="ITEM_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="ItemMovement" />
+        </set>
+        <set name="drugItemUnitQuantities" table="DRUG_ITEM_UNIT_QUANTITY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO" length="20" not-null="true" />
+                <column name="ITEM_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DrugItemUnitQuantity" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="CustPointSpends" table="CUST_POINT_SPENDS">
+        <composite-id name="id" class="CustPointSpendsId">
+            <key-property name="custNo" type="string">
+                <column name="CUST_NO" length="10" />
+            </key-property>
+            <key-property name="cardNo" type="string">
+                <column name="CARD_NO" length="10" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="loyalityCards" class="LoyalityCards" update="false" insert="false" fetch="select">
+            <column name="CARD_NO" length="10" not-null="true" />
+        </many-to-one>
+        <property name="spendDate" type="date">
+            <column name="SPEND_DATE" length="7" not-null="true" />
+        </property>
+        <property name="invoiceNo" type="string">
+            <column name="INVOICE_NO" length="10" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="points" type="double">
+            <column name="POINTS" precision="126" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

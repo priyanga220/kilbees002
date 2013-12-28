@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Supplier" table="SUPPLIER">
+        <composite-id name="id" class="SupplierId">
+            <key-property name="supNo" type="string">
+                <column name="SUP_NO" length="20" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="supplier" class="Supplier" fetch="select">
+            <column name="REF_SUP_NO" length="20" />
+            <column name="UNIT_NO" length="20" />
+        </many-to-one>
+        <property name="supName" type="string">
+            <column name="SUP_NAME" length="200" not-null="true" />
+        </property>
+        <property name="payeeName" type="string">
+            <column name="PAYEE_NAME" length="200" not-null="true" />
+        </property>
+        <property name="telephone" type="string">
+            <column name="TELEPHONE" length="10" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="10" />
+        </property>
+        <property name="addressNo" type="string">
+            <column name="ADDRESS_NO" length="200" not-null="true" />
+        </property>
+        <property name="addressStreet" type="string">
+            <column name="ADDRESS_STREET" length="100" />
+        </property>
+        <property name="addressTown" type="string">
+            <column name="ADDRESS_TOWN" length="100" />
+        </property>
+        <property name="supRegisteredDate" type="date">
+            <column name="SUP_REGISTERED_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="currentStatus" type="big_decimal">
+            <column name="CURRENT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="oldCode" type="string">
+            <column name="OLD_CODE" length="20" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="E_MAIL" length="200" />
+        </property>
+        <property name="webAdd" type="string">
+            <column name="WEB_ADD" length="200" />
+        </property>
+        <property name="creditDueDates" type="java.lang.Integer">
+            <column name="CREDIT_DUE_DATES" precision="5" scale="0" />
+        </property>
+        <set name="grns" table="GRN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SUP_NO" length="20" not-null="true" />
+                <column name="UNIT_NO_SUP" length="20" not-null="true" />
+            </key>
+            <one-to-many class="Grn" />
+        </set>
+        <set name="drugItemPharmacyUnits" table="DRUG_ITEM_PHARMACY_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SUP_NO" length="20" not-null="true" />
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DrugItemPharmacyUnit" />
+        </set>
+        <set name="suppliers" table="SUPPLIER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REF_SUP_NO" length="20" />
+                <column name="UNIT_NO" length="20" />
+            </key>
+            <one-to-many class="Supplier" />
+        </set>
+        <set name="purchaseOrders" table="PURCHASE_ORDER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SUP_NO" length="20" not-null="true" />
+                <column name="UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PurchaseOrder" />
+        </set>
+    </class>
+</hibernate-mapping>

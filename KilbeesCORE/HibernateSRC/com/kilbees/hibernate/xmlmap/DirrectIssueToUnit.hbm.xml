@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="DirrectIssueToUnit" table="DIRRECT_ISSUE_TO_UNIT">
+        <id name="dirrectIssueNo" type="string">
+            <column name="DIRRECT_ISSUE_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pharmacyUnitByFromUnitNo" class="PharmacyUnit" fetch="select">
+            <column name="FROM_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pharmacyUnitByToUnitNo" class="PharmacyUnit" fetch="select">
+            <column name="TO_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="dirrectIssueDate" type="date">
+            <column name="DIRRECT_ISSUE_DATE" length="7" not-null="true" />
+        </property>
+        <property name="issueStatus" type="big_decimal">
+            <column name="ISSUE_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="packageNo" type="string">
+            <column name="PACKAGE_NO" length="20" />
+        </property>
+        <set name="dirrectIssueToUnitItems" table="DIRRECT_ISSUE_TO_UNIT_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DIRRECT_ISSUE_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DirrectIssueToUnitItem" />
+        </set>
+    </class>
+</hibernate-mapping>

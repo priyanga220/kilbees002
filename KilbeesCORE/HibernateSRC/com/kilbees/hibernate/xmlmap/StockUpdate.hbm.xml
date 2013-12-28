@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="StockUpdate" table="STOCK_UPDATE">
+        <composite-id name="id" class="StockUpdateId">
+            <key-property name="stockUpdateNo" type="string">
+                <column name="STOCK_UPDATE_NO" length="20" />
+            </key-property>
+            <key-property name="beforeVerificationNo" type="string">
+                <column name="BEFORE_VERIFICATION_NO" length="20" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+            <key-property name="grnNo" type="string">
+                <column name="GRN_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="oldQuantity" type="java.lang.Double">
+            <column name="OLD_QUANTITY" precision="126" scale="0" />
+        </property>
+        <property name="newQuantity" type="java.lang.Double">
+            <column name="NEW_QUANTITY" precision="126" scale="0" />
+        </property>
+        <property name="stockUpdateDate" type="date">
+            <column name="STOCK_UPDATE_DATE" length="7" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

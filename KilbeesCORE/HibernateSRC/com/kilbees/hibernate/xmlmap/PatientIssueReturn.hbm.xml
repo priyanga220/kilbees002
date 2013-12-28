@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PatientIssueReturn" table="PATIENT_ISSUE_RETURN">
+        <composite-id name="id" class="PatientIssueReturnId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="patientIssueReturnNo" type="string">
+                <column name="PATIENT_ISSUE_RETURN_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="issueNo" type="string">
+            <column name="ISSUE_NO" length="20" not-null="true" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="patientIssueReturnDate" type="date">
+            <column name="PATIENT_ISSUE_RETURN_DATE" length="7" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="patientIssueReturnType" type="big_decimal">
+            <column name="PATIENT_ISSUE_RETURN_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <set name="patientIssueReturnItems" table="PATIENT_ISSUE_RETURN_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+                <column name="PATIENT_ISSUE_RETURN_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PatientIssueReturnItem" />
+        </set>
+    </class>
+</hibernate-mapping>

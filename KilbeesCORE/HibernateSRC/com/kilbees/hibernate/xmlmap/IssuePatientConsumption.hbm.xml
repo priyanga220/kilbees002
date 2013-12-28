@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="IssuePatientConsumption" table="ISSUE_PATIENT_CONSUMPTION">
+        <composite-id name="id" class="IssuePatientConsumptionId">
+            <key-property name="pharmacyUnit1" type="string">
+                <column name="PHARMACY_UNIT1" length="20" />
+            </key-property>
+            <key-property name="pharmacyUnit2" type="string">
+                <column name="PHARMACY_UNIT2" length="20" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

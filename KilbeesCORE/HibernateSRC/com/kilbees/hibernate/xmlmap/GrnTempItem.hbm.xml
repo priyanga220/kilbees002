@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="GrnTempItem" table="GRN_TEMP_ITEM">
+        <composite-id name="id" class="GrnTempItemId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="poNumber" type="string">
+                <column name="PO_NUMBER" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="pkt" type="big_decimal">
+            <column name="PKT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="unit" type="big_decimal">
+            <column name="UNIT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="BQty" type="big_decimal">
+            <column name="B_QTY" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="costPrice" type="big_decimal">
+            <column name="COST_PRICE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="rerailPrice" type="big_decimal">
+            <column name="RERAIL_PRICE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="batchNo" type="string">
+            <column name="BATCH_NO" length="20" not-null="true" />
+        </property>
+        <property name="expDate" type="date">
+            <column name="EXP_DATE" length="7" not-null="true" />
+        </property>
+        <property name="discount" type="big_decimal">
+            <column name="DISCOUNT" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="tax" type="big_decimal">
+            <column name="TAX" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="txnDate" type="date">
+            <column name="TXN_DATE" length="7" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="newCost" type="big_decimal">
+            <column name="NEW_COST" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="newRetail" type="big_decimal">
+            <column name="NEW_RETAIL" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

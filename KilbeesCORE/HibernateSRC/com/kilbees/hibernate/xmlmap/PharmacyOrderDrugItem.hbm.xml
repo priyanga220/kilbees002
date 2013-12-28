@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PharmacyOrderDrugItem" table="PHARMACY_ORDER_DRUG_ITEM">
+        <composite-id name="id" class="PharmacyOrderDrugItemId">
+            <key-property name="orderNo" type="string">
+                <column name="ORDER_NO" length="20" />
+            </key-property>
+            <key-property name="itemNo" type="string">
+                <column name="ITEM_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <property name="quantity" type="double">
+            <column name="QUANTITY" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="quantityInHand" type="double">
+            <column name="QUANTITY_IN_HAND" precision="126" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

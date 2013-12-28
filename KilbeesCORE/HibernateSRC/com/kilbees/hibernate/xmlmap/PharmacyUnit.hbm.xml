@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PharmacyUnit" table="PHARMACY_UNIT">
+        <id name="unitNo" type="string">
+            <column name="UNIT_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="unitName" type="string">
+            <column name="UNIT_NAME" length="100" not-null="true" />
+        </property>
+        <property name="shortName" type="string">
+            <column name="SHORT_NAME" length="20" not-null="true" />
+        </property>
+        <property name="margin" type="double">
+            <column name="MARGIN" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="unitRegisteredDate" type="date">
+            <column name="UNIT_REGISTERED_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="currentStatus" type="big_decimal">
+            <column name="CURRENT_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="phaIssueType" type="long">
+            <column name="PHA_ISSUE_TYPE" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="detailBilling" type="big_decimal">
+            <column name="DETAIL_BILLING" precision="22" scale="0" />
+        </property>
+        <property name="accId" type="string">
+            <column name="ACC_ID" length="10" not-null="true" />
+        </property>
+        <property name="withCashier" type="long">
+            <column name="WITH_CASHIER" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="address1" type="string">
+            <column name="ADDRESS_1" length="100" not-null="true" />
+        </property>
+        <property name="address2" type="string">
+            <column name="ADDRESS_2" length="100" />
+        </property>
+        <property name="address3" type="string">
+            <column name="ADDRESS_3" length="100" />
+        </property>
+        <property name="telephone" type="string">
+            <column name="TELEPHONE" length="100" />
+        </property>
+        <set name="drugItemPharmacyUnits" table="DRUG_ITEM_PHARMACY_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DrugItemPharmacyUnit" />
+        </set>
+        <set name="systemLogins" table="SYSTEM_LOGIN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="SystemLogin" />
+        </set>
+        <set name="testPhServices" table="TEST_PH_SERVICE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_ID" length="20" not-null="true" />
+            </key>
+            <one-to-many class="TestPhService" />
+        </set>
+        <set name="itemPrices" table="ITEM_PRICE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="ItemPrice" />
+        </set>
+        <set name="relatedPharmacyForRequestsesForPharmacyUnit2" table="RELATED_PHARMACY_FOR_REQUESTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PHARMACY_UNIT_2" length="20" not-null="true" />
+            </key>
+            <one-to-many class="RelatedPharmacyForRequests" />
+        </set>
+        <set name="systemUserUnits" table="SYSTEM_USER_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_ID" length="20" not-null="true" />
+            </key>
+            <one-to-many class="SystemUserUnit" />
+        </set>
+        <set name="itemMovements" table="ITEM_MOVEMENT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="ItemMovement" />
+        </set>
+        <set name="beforeVerificationItems" table="BEFORE_VERIFICATION_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="BeforeVerificationItem" />
+        </set>
+        <set name="exceeds" table="EXCEED" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="Exceed" />
+        </set>
+        <set name="suppliers" table="SUPPLIER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="Supplier" />
+        </set>
+        <set name="outdoorPatientIssues" table="OUTDOOR_PATIENT_ISSUE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="OutdoorPatientIssue" />
+        </set>
+        <set name="grns" table="GRN" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="Grn" />
+        </set>
+        <set name="pharmacyOrdersForToUnitNo" table="PHARMACY_ORDER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TO_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PharmacyOrder" />
+        </set>
+        <set name="purchaseOrders" table="PURCHASE_ORDER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PurchaseOrder" />
+        </set>
+        <set name="beforeVerifications" table="BEFORE_VERIFICATION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="BeforeVerification" />
+        </set>
+        <set name="purchaseOrderTempItems" table="PURCHASE_ORDER_TEMP_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_CODE" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PurchaseOrderTempItem" />
+        </set>
+        <set name="itemConsumptions" table="ITEM_CONSUMPTION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="ItemConsumption" />
+        </set>
+        <set name="paymentTypes" table="PAYMENT_TYPE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PAYMENT_ID" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PaymentType" />
+        </set>
+        <set name="reorderTempItems" table="REORDER_TEMP_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_CODE" length="20" not-null="true" />
+            </key>
+            <one-to-many class="ReorderTempItem" />
+        </set>
+        <set name="pharmacyUnitLogs" table="PHARMACY_UNIT_LOG" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PharmacyUnitLog" />
+        </set>
+        <set name="relatedPharmacyForRequestsesForPharmacyUnit1" table="RELATED_PHARMACY_FOR_REQUESTS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PHARMACY_UNIT_1" length="20" not-null="true" />
+            </key>
+            <one-to-many class="RelatedPharmacyForRequests" />
+        </set>
+        <set name="pharmacyOrdersForFromUnitNo" table="PHARMACY_ORDER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="FROM_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="PharmacyOrder" />
+        </set>
+        <set name="dirrectIssueToUnitsForToUnitNo" table="DIRRECT_ISSUE_TO_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TO_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DirrectIssueToUnit" />
+        </set>
+        <set name="dirrectIssueToUnitsForFromUnitNo" table="DIRRECT_ISSUE_TO_UNIT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="FROM_UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DirrectIssueToUnit" />
+        </set>
+        <set name="tempQuantities" table="TEMP_QUANTITY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="TempQuantity" />
+        </set>
+    </class>
+</hibernate-mapping>

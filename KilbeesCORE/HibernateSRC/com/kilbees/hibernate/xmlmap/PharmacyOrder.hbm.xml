@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="PharmacyOrder" table="PHARMACY_ORDER">
+        <id name="orderNo" type="string">
+            <column name="ORDER_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pharmacyUnitByFromUnitNo" class="PharmacyUnit" fetch="select">
+            <column name="FROM_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pharmacyUnitByToUnitNo" class="PharmacyUnit" fetch="select">
+            <column name="TO_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="orderType" type="big_decimal">
+            <column name="ORDER_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="orderImportance" type="big_decimal">
+            <column name="ORDER_IMPORTANCE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="orderDate" type="date">
+            <column name="ORDER_DATE" length="7" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="orderStatus" type="big_decimal">
+            <column name="ORDER_STATUS" precision="38" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

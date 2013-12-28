@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="EpharmaSystemInfo" table="EPHARMA_SYSTEM_INFO">
+        <composite-id name="id" class="EpharmaSystemInfoId">
+            <key-property name="systemOwner" type="string">
+                <column name="SYSTEM_OWNER" length="100" />
+            </key-property>
+            <key-property name="sysDate" type="date">
+                <column name="SYS_DATE" length="7" />
+            </key-property>
+            <key-property name="currVersion" type="string">
+                <column name="CURR_VERSION" length="50" />
+            </key-property>
+            <key-property name="enablePrintouts" type="big_decimal">
+                <column name="ENABLE_PRINTOUTS" precision="22" scale="0" />
+            </key-property>
+            <key-property name="sysMacKey" type="string">
+                <column name="SYS_MAC_KEY" length="100" />
+            </key-property>
+            <key-property name="regDate" type="date">
+                <column name="REG_DATE" length="7" />
+            </key-property>
+            <key-property name="isRegDate" type="string">
+                <column name="IS_REG_DATE" length="100" />
+            </key-property>
+            <key-property name="isSysDate" type="string">
+                <column name="IS_SYS_DATE" length="100" />
+            </key-property>
+            <key-property name="renewDate" type="date">
+                <column name="RENEW_DATE" length="7" />
+            </key-property>
+            <key-property name="isRnd" type="string">
+                <column name="IS_RND" length="100" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

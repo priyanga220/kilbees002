@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="SystemFunctions" table="SYSTEM_FUNCTIONS">
+        <id name="functionId" type="string">
+            <column name="FUNCTION_ID" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="functionName" type="string">
+            <column name="FUNCTION_NAME" length="200" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="200" />
+        </property>
+        <property name="txnDate" type="date">
+            <column name="TXN_DATE" length="7" />
+        </property>
+        <property name="status" type="java.lang.Boolean">
+            <column name="STATUS" precision="1" scale="0" />
+        </property>
+        <property name="functionCategory" type="string">
+            <column name="FUNCTION_CATEGORY" length="10" />
+        </property>
+        <property name="showOrder" type="java.lang.Short">
+            <column name="SHOW_ORDER" precision="3" scale="0" />
+        </property>
+        <property name="functionSubCategory" type="string">
+            <column name="FUNCTION_SUB_CATEGORY" length="10" />
+        </property>
+        <property name="functionType" type="java.lang.Boolean">
+            <column name="FUNCTION_TYPE" precision="1" scale="0" />
+        </property>
+        <property name="moduleId" type="string">
+            <column name="MODULE_ID" length="5" not-null="true" />
+        </property>
+        <set name="systemUserFunctionses" table="SYSTEM_USER_FUNCTIONS" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="FUNCTION_ID" length="10" not-null="true" />
+            </key>
+            <one-to-many class="SystemUserFunctions" />
+        </set>
+    </class>
+</hibernate-mapping>

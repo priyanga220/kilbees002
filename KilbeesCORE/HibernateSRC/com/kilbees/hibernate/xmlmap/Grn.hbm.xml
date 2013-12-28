@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Grn" table="GRN">
+        <composite-id name="id" class="GrnId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="grnNo" type="string">
+                <column name="GRN_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="purchaseOrder" class="PurchaseOrder" fetch="select">
+            <column name="PURCHASE_ORDER_NO" length="20" not-null="true" />
+            <column name="UNIT_NO_PO" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="supplier" class="Supplier" fetch="select">
+            <column name="SUP_NO" length="20" not-null="true" />
+            <column name="UNIT_NO_SUP" length="20" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="supInvoiceNo" type="string">
+            <column name="SUP_INVOICE_NO" length="20" not-null="true" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="discountAmount" type="big_decimal">
+            <column name="DISCOUNT_AMOUNT" precision="10" />
+        </property>
+        <property name="taxAmount" type="big_decimal">
+            <column name="TAX_AMOUNT" precision="10" />
+        </property>
+        <property name="bonusAmount" type="big_decimal">
+            <column name="BONUS_AMOUNT" precision="10" />
+        </property>
+        <property name="settleStatus" type="big_decimal">
+            <column name="SETTLE_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="grnPaymentType" type="big_decimal">
+            <column name="GRN_PAYMENT_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="printingStatus" type="big_decimal">
+            <column name="PRINTING_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="userId" type="string">
+            <column name="USER_ID" length="20" not-null="true" />
+        </property>
+        <property name="userIp" type="string">
+            <column name="USER_IP" length="15" not-null="true" />
+        </property>
+        <property name="grnDate" type="date">
+            <column name="GRN_DATE" length="7" not-null="true" />
+        </property>
+        <property name="purchaseType" type="big_decimal">
+            <column name="PURCHASE_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="currentPrice" type="big_decimal">
+            <column name="CURRENT_PRICE" precision="12" not-null="true" />
+        </property>
+        <property name="grnStatus" type="big_decimal">
+            <column name="GRN_STATUS" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="issueOrder" type="big_decimal">
+            <column name="ISSUE_ORDER" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="throughUnit" type="string">
+            <column name="THROUGH_UNIT" length="20" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="REMARKS" length="200" not-null="true" />
+        </property>
+        <property name="nbtValue" type="big_decimal">
+            <column name="NBT_VALUE" precision="10" />
+        </property>
+        <set name="drugItemUnitQuantities" table="DRUG_ITEM_UNIT_QUANTITY" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UNIT_NO_GRN" length="20" not-null="true" />
+                <column name="GRN_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="DrugItemUnitQuantity" />
+        </set>
+        <set name="grnDrugItems" table="GRN_DRUG_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PH_UNIT_NO" length="20" not-null="true" />
+                <column name="GRN_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="GrnDrugItem" />
+        </set>
+    </class>
+</hibernate-mapping>

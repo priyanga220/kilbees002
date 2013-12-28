@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="OpdCreditPatients" table="OPD_CREDIT_PATIENTS">
+        <composite-id name="id" class="OpdCreditPatientsId">
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+            <key-property name="regNo" type="string">
+                <column name="REG_NO" length="25" />
+            </key-property>
+        </composite-id>
+        <property name="patientName" type="string">
+            <column name="PATIENT_NAME" length="300" />
+        </property>
+        <property name="creditCompanyId" type="string">
+            <column name="CREDIT_COMPANY_ID" length="20" />
+        </property>
+        <property name="regDate" type="date">
+            <column name="REG_DATE" length="7" />
+        </property>
+        <property name="regUser" type="string">
+            <column name="REG_USER" length="50" />
+        </property>
+        <property name="nid" type="string">
+            <column name="NID" length="50" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="1" />
+        </property>
+        <property name="policyNo" type="string">
+            <column name="POLICY_NO" length="25" />
+        </property>
+        <property name="sex" type="string">
+            <column name="SEX" length="1" />
+        </property>
+        <property name="foriegnFlag" type="string">
+            <column name="FORIEGN_FLAG" length="1" />
+        </property>
+        <property name="ageYy" type="java.lang.Short">
+            <column name="AGE_YY" precision="3" scale="0" />
+        </property>
+        <property name="ageMm" type="java.lang.Byte">
+            <column name="AGE_MM" precision="2" scale="0" />
+        </property>
+        <property name="finalBillStatus" type="string">
+            <column name="FINAL_BILL_STATUS" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Directions" table="DIRECTIONS">
+        <id name="directionNo" type="string">
+            <column name="DIRECTION_NO" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="directionName" type="string">
+            <column name="DIRECTION_NAME" length="100" not-null="true" />
+        </property>
+        <property name="directionDescription" type="string">
+            <column name="DIRECTION_DESCRIPTION" length="100" not-null="true" />
+        </property>
+        <property name="noOfItems" type="big_decimal">
+            <column name="NO_OF_ITEMS" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="sinhala" type="string">
+            <column name="SINHALA" length="200" />
+        </property>
+        <set name="outdoorIssueItems" table="OUTDOOR_ISSUE_ITEM" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DIRECTION_NO" length="20" not-null="true" />
+            </key>
+            <one-to-many class="OutdoorIssueItem" />
+        </set>
+    </class>
+</hibernate-mapping>

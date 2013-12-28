@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Banks" table="BANKS">
+        <id name="bankId" type="string">
+            <column name="BANK_ID" length="10" />
+            <generator class="assigned" />
+        </id>
+        <property name="bankName" type="string">
+            <column name="BANK_NAME" length="100" not-null="true" />
+        </property>
+        <property name="regUser" type="string">
+            <column name="REG_USER" length="20" />
+        </property>
+        <property name="regDate" type="date">
+            <column name="REG_DATE" length="7" not-null="true" />
+        </property>
+        <property name="regIp" type="string">
+            <column name="REG_IP" length="15" not-null="true" />
+        </property>
+        <property name="status" type="big_decimal">
+            <column name="STATUS" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

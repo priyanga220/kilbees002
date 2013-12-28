@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 21, 2013 7:48:48 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ItemConsumption" table="ITEM_CONSUMPTION">
+        <composite-id name="id" class="ItemConsumptionId">
+            <key-property name="itemConsumptionNo" type="string">
+                <column name="ITEM_CONSUMPTION_NO" length="26" />
+            </key-property>
+            <key-property name="phUnitNo" type="string">
+                <column name="PH_UNIT_NO" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pharmacyUnit" class="PharmacyUnit" update="false" insert="false" fetch="select">
+            <column name="PH_UNIT_NO" length="20" not-null="true" />
+        </many-to-one>
+        <property name="itemNo" type="string">
+            <column name="ITEM_NO" length="20" not-null="true" />
+        </property>
+        <property name="txnNo" type="string">
+            <column name="TXN_NO" length="20" not-null="true" />
+        </property>
+        <property name="txnDate" type="date">
+            <column name="TXN_DATE" length="7" not-null="true" />
+        </property>
+        <property name="txnType" type="big_decimal">
+            <column name="TXN_TYPE" precision="38" scale="0" not-null="true" />
+        </property>
+        <property name="quantity" type="double">
+            <column name="QUANTITY" precision="126" scale="0" not-null="true" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="TOTAL_AMOUNT" precision="10" not-null="true" />
+        </property>
+        <property name="issueStatus" type="long">
+            <column name="ISSUE_STATUS" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="totalWeightAmount" type="big_decimal">
+            <column name="TOTAL_WEIGHT_AMOUNT" precision="38" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
