@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="common" namespace="/common" extends="kilbees-default">
+		
+		<action name="test-MDB" class="com.kilbees.struts2.action.common.NavigatorAction" method="sendMsgToTestMDB">
+        		
+        		<result type="json">
+					<param name="includeProperties">
+					   send
+					  </param>
+        	</result>
+		</action>
+		
+		<action name="view-carousel-menu" class="com.kilbees.struts2.action.common.NavigatorAction" method="loadCarouselMenu">
+        		
+        		<result name="success">/WEB-INF/jsp/gridFilters/categoryFilter.jsp</result>
+		</action>
+		
+		<action name="goto-main-menu" class="com.kilbees.struts2.action.common.NavigatorAction" method="gotomenupage">
+        		
+        		<result name="success">/WEB-INF/jsp/common/taurus/index.jsp</result>
+		</action>
+		
+		<action name="upload-xml-file" class="com.kilbees.struts2.action.utils.XMLUploadction" method="processXMLFile">
+			<interceptor-ref name="loginStack"></interceptor-ref>
+        	<interceptor-ref name="exception"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="fileUpload">
+	       		<param name="maximumSize">10240000000</param>
+  	    	</interceptor-ref> 
+	    	<result type="json">
+					<param name="includeProperties">
+					   fileUploadContentType
+					  </param>
+        	</result>
+		</action>
+    </package>
+</struts>
