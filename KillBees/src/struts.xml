@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" /> <!-- set to false for prod -->
+
+	<package name="events" namespace="/events" extends="struts-default">
+		<!--  
+			<action name="*" class="actions.events.{1}">
+				<result>/views/events/{1}.jsp</result>
+				<result name="redirect" type="redirect">${redirectUrl}</result>
+			</action>
+	
+			<action name="Listing" class="actions.events.Listing" method="execute">
+				<result name="success">/views/events/Listing.jsp</result>
+				<result name="input">index.jsp</result>
+			</action>
+		
+		-->
+	</package>
+		
+	<package name="kilbees-default" namespace="/" extends="struts-default,json-default">
+		<interceptors>
+			<interceptor name="LoginInterceptor" class="com.kilbees.struts2.interceptor.LoginInterceptor"></interceptor>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="LoginInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref> 
+			</interceptor-stack>
+			<interceptor-stack name="guest">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		
+		<global-results>
+			<!-- <result name="login">/WEB-INF/jsp/authentication/accessInterface.jsp</result> -->
+			<result name="login">/WEB-INF/jsp/authentication/star-gate.jsp</result>
+		</global-results>
+		
+    	<action name="welcome" class="com.kilbees.struts2.action.login.AuthenticateAction" method="welcomeGuest" >
+    		<interceptor-ref name="guest"></interceptor-ref>
+			<!-- <result>/WEB-INF/jsp/authentication/accessInterface.jsp</result> -->
+			
+
+			<result>/WEB-INF/jsp/authentication/star-gate.jsp</result>
+		</action>	
+	</package>	
+	
+	<include file="./com/kilbees/struts2/xml/login-struts.xml" />
+	<include file="./com/kilbees/struts2/xml/item-struts.xml" />
+	<include file="./com/kilbees/struts2/xml/common-struts.xml" />
+	<include file="./com/kilbees/struts2/xml/user-struts.xml" />
+</struts>

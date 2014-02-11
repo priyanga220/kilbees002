@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	
+	<package name="item" namespace="/item" extends="kilbees-default">
+		<action name="view-full-item-list" class="com.kilbees.struts2.action.logic.ItemAction" method="viewFullItemList" >
+				<result name="success">/WEB-INF/jsp/inventry/fullitemlist.jsp</result>
+				<result name="input">/WEB-INF/jsp/authentication/home.jsp</result>
+				<result name="error">/WEB-INF/jsp/error/runtimeerrorpage.jsp</result>
+		</action>
+
+		<action name="item-list-grid-data-provider" class="com.kilbees.struts2.action.logic.ItemListGridAction" method="loadJSON">
+				<result type="json">
+					<param name="includeProperties">
+					    ^gridModel\[\d+\]\.itemNo,
+    					^gridModel\[\d+\]\.tradeName,
+    					^gridModel\[\d+\]\.itemRegisteredDate,
+    					^gridModel\[\d+\]\.drugCategory\.categoryName,
+    					^gridModel\[\d+\]\.margin,
+    					_search,page,records,rows,sidx,sord,total
+					  </param>
+        	</result>
+		</action>
+		
+		<action name="load-category-grid-filter" class="com.kilbees.struts2.action.utils.FilterSupplieraAction" method="loadCategoyFilter">
+        		
+        		<result name="success">/WEB-INF/jsp/gridFilters/categoryFilter.jsp</result>
+		</action>
+    </package>
+</struts>
