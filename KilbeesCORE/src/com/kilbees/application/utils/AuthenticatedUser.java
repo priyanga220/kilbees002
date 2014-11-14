@@ -1,6 +1,7 @@
 package com.kilbees.application.utils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kilbees.bussiness.model.SystemUserFunctions;
@@ -23,6 +24,13 @@ public class AuthenticatedUser implements Serializable {
 	private String passWord;
 	private List<SystemUserFunctions> userFuncList;
 	private UserRole role;
+	
+	private List<SystemUserFunctions> dashBoardFuncList = new ArrayList<>();
+	private List<SystemUserFunctions> bussinessRulesFuncList = new ArrayList<>();
+	private List<SystemUserFunctions> salesFuncList = new ArrayList<>();
+	private List<SystemUserFunctions> inventryFuncList = new ArrayList<>();
+	private List<SystemUserFunctions> reportFuncList = new ArrayList<>();
+	private List<SystemUserFunctions> miscFuncList = new ArrayList<>();
 	
 	public AuthenticatedUser()
 	{
@@ -67,6 +75,58 @@ public class AuthenticatedUser implements Serializable {
 	public void setUserFuncList(List<SystemUserFunctions> userFuncList) {
 		this.userFuncList = userFuncList;
 	}
+	
+	public List<SystemUserFunctions> getDashBoardFuncList() {
+		return dashBoardFuncList;
+	}
+
+	public void setDashBoardFuncList(List<SystemUserFunctions> dashBoardFuncList) {
+		this.dashBoardFuncList = dashBoardFuncList;
+	}
+
+	public List<SystemUserFunctions> getBussinessRulesFuncList() {
+		return bussinessRulesFuncList;
+	}
+
+	public void setBussinessRulesFuncList(
+			List<SystemUserFunctions> bussinessRulesFuncList) {
+		this.bussinessRulesFuncList = bussinessRulesFuncList;
+	}
+
+	public List<SystemUserFunctions> getSalesFuncList() {
+		return salesFuncList;
+	}
+
+	public void setSalesFuncList(List<SystemUserFunctions> salesFuncList) {
+		this.salesFuncList = salesFuncList;
+	}
+
+	public List<SystemUserFunctions> getInventryFuncList() {
+		return inventryFuncList;
+	}
+
+	public void setInventryFuncList(List<SystemUserFunctions> inventryFuncList) {
+		this.inventryFuncList = inventryFuncList;
+	}
+
+	public List<SystemUserFunctions> getReportFuncList() {
+		return reportFuncList;
+	}
+
+	public void setReportFuncList(List<SystemUserFunctions> reportFuncList) {
+		this.reportFuncList = reportFuncList;
+	}
+
+	public List<SystemUserFunctions> getMiscFuncList() {
+		return miscFuncList;
+	}
+
+	public void setMiscFuncList(List<SystemUserFunctions> miscFuncList) {
+		this.miscFuncList = miscFuncList;
+	}
+	
+	
+
 	
 	
 	

@@ -22,8 +22,15 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "SYSTEM_LOGIN")
-public class SystemLogin implements java.io.Serializable {
+public class SystemLogin extends DomainDefault  implements java.io.Serializable 
+{
 
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String userName;
 	private Theme theme;
 	private PharmacyUnit pharmacyUnit;

@@ -766,9 +766,19 @@ public interface Constants
 	 public static final String ITEM_MOVEMENT_MAPPING = " -- ";
 	 
 	 //------------------------------------------------------------------------------------------------------------------
+	 
+	 //General System Process Messages
+	 public static final String NO_RESULT = "NO_RESULT_FOUND";
 	 // Login Process Messages
 	 public static final String USERNAME_NOT_VALID = "No such Username..!!";
 	 public static final String MULTIPLE_USERS_SAME_UN = "Two Users exist in the System for Your Username. Please Contact System Admin";
 	 public static final String PASSWORD_ERROR = "Invalid Password Format..!!";
 	 public static final String PASSWORD_WRONG = "Please Enter the Correct Password..!!";
+	 
+	 
+	 //Logger Messages
+	 public static final String SET_SESSION_FAC_INFO = "Setting the Session Factory";
+	 
+	 //Constant URLs
+	 public static final String HOME_URL = "/login/goto-home.action";
 }

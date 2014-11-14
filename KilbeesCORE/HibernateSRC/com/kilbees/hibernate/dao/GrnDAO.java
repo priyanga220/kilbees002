@@ -1,12 +1,17 @@
 package com.kilbees.hibernate.dao;
 // Generated Sep 21, 2013 8:18:01 PM by Hibernate Tools 3.4.0.CR1
 
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 
+import com.kilbees.bussiness.model.DomainDefault;
 import com.kilbees.bussiness.model.Grn;
 import com.kilbees.bussiness.model.GrnId;
 
@@ -15,7 +20,7 @@ import com.kilbees.bussiness.model.GrnId;
  * @see .Grn
  * @author Hibernate Tools
  */
-public class GrnDAO extends AbstractDao<Grn, GrnId> 
+public class GrnDAO
 {
 
 	private static final Log log = LogFactory.getLog(GrnDAO.class);
@@ -68,4 +73,7 @@ public class GrnDAO extends AbstractDao<Grn, GrnId>
 			throw re;
 		}
 	}
+
+
+
 }
