@@ -21,66 +21,55 @@ public class ItemListGridAction extends AbstractAction {
 	private IItemDAO itemDAO;
 	
 	// Your result List
-		  private List<DrugItem>      gridModel;
+	  private List<DrugItem>      gridModel;
 
-		  // get how many rows we want to have into the grid - rowNum attribute in the
-		  // grid
-		  private Integer rows = 0;
+	  // get how many rows we want to have into the grid - rowNum attribute in the
+	  // grid
+	  private Integer rows = 0;
 
-		  // Get the requested page. By default grid sets this to 1.
-		  private Integer page = 0;
+	  // Get the requested page. By default grid sets this to 1.
+	  private Integer page = 0;
 
-		  // sorting order - asc or desc
-		  private String sord;
+	  // sorting order - asc or desc
+	  private String sord;
 
-		  // get index row - i.e. user click to sort.
-		  private String sidx;
+	  // get index row - i.e. user click to sort.
+	  private String sidx;
 
-		  // Search Field
-		  private String searchField;
+	  // Search Field
+	  private String searchField;
 
-		  // The Search String
-		  private String searchString;
+	  // The Search String
+	  private String searchString;
 
-		  // Limit the result when using local data, value form attribute rowTotal
-		  private Integer totalrows;
+	  // Limit the result when using local data, value form attribute rowTotal
+	  private Integer totalrows;
 
-		  // he Search Operation
-		  // ['eq','ne','lt','le','gt','ge','bw','bn','in','ni','ew','en','cn','nc']
-		  private String searchOper;
-		  
-		  private boolean _search; // Filter Search 
+	  // he Search Operation
+	  // ['eq','ne','lt','le','gt','ge','bw','bn','in','ni','ew','en','cn','nc']
+	  private String searchOper;
+	  
+	  private boolean _search; // Filter Search 
 
-		  
+	  
 
-		// Your Total Pages
-		  private Integer total = 0;
+	// Your Total Pages
+	  private Integer total = 0;
 
-		  // All Records
-		  private Integer records = 0;
+	  // All Records
+	  private Integer records = 0;
 
-		  private boolean loadonce = false;
-		  private Map<String, Object> session;
-		  private List<DrugItem> itemList;
-		  //=======================
+	  private boolean loadonce = false;
+	  private Map<String, Object> session;
+	  private List<DrugItem> itemList;
+	  //=======================
 
 		  public String execute()
 		  {
-
-
-		    //Object list = session.get("gridUserDoclist");
-		    //logger.info("------  "+list.toString());
-		    //if (list != null)
-		    //{
-		    	///logger.info("Build new List from sessionxxxx");
-		    	//myDocuments = (List<UserDocument>) list;
-		    //}
-		    //else
-		    {
 		      System.out.println("Build new List");
 		      itemList = itemDAO.getItemList();
 		      System.out.println("List Count  "+itemList.size());
-		    }
+
 
 		    if (sord != null && sord.equalsIgnoreCase("asc"))
 		    {

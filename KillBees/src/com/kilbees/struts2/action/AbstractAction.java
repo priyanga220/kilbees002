@@ -6,6 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.kilbees.application.utils.AuthenticatedUser;
 import com.kilbees.application.utils.AuthenticatedUser.UserRole;
+import com.kilbees.application.utils.Constants;
 import com.kilbees.application.utils.SessionKey;
 import com.kilbees.bussiness.exception.SessionNotExist;
 import com.opensymphony.xwork2.ActionSupport;
@@ -27,6 +28,8 @@ public abstract class AbstractAction extends ActionSupport implements SessionAwa
 	
 	private int x;
 	private int y;
+	private String _;
+	private String nd;
 
 	protected STATUS status;
 
@@ -37,6 +40,7 @@ public abstract class AbstractAction extends ActionSupport implements SessionAwa
 	public void addSessionUserVariable(AuthenticatedUser user) throws SessionNotExist {
 		if(session != null) {
 			session.put(SessionKey.SESSION_USER, user);
+			
 	} else {
 
 			throw new SessionNotExist(SESSION_NOT_EXIST);
@@ -130,5 +134,23 @@ public abstract class AbstractAction extends ActionSupport implements SessionAwa
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	public String get_() {
+		return _;
+	}
+
+	public void set_(String _) {
+		this._ = _;
+	}
+
+	public String getNd() {
+		return nd;
+	}
+
+	public void setNd(String nd) {
+		this.nd = nd;
+	}
+	
+	
 
 }

@@ -52,4 +52,5 @@
 	<include file="./com/kilbees/struts2/xml/item-struts.xml" />
 	<include file="./com/kilbees/struts2/xml/common-struts.xml" />
 	<include file="./com/kilbees/struts2/xml/user-struts.xml" />
+	<include file="./com/kilbees/struts2/xml/admin-struts.xml" />
 </struts>

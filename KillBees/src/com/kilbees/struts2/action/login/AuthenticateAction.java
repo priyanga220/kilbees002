@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.kilbees.application.utils.AuthenticatedUser;
 import com.kilbees.application.utils.SessionKey;
@@ -13,23 +14,29 @@ import com.kilbees.bussiness.exception.SessionNotExist;
 import com.kilbees.bussiness.imanager.IKILBEESLoginManager;
 import com.kilbees.bussiness.manager.KILBEESLoginManager;
 import com.kilbees.bussiness.model.DrugCategory;
+import com.kilbees.bussiness.model.DrugItem;
 import com.kilbees.bussiness.model.SystemUserFunctions;
+import com.kilbees.hibernate.dao.DrugItemDAO;
+import com.kilbees.hibernate.idao.IDrugItemDAO;
 import com.kilbees.struts2.action.AbstractAction;
 
 
-
+@Controller
 public class AuthenticateAction extends AbstractAction 
 {
 
 	private static final long serialVersionUID = 1L;
-	private List<DrugCategory> collection;
-	private DrugCategory category;
+	//private List<DrugCategory> collection;
+	//private DrugCategory category;
 	private Logger logger = Logger.getLogger(AuthenticateAction.class);
 	
 	
 
 	@Autowired
 	private IKILBEESLoginManager loginManager;
+	
+	@Autowired
+	private IDrugItemDAO drugItemDAO;
 
 	public String welcomeGuest()
 	{
@@ -38,10 +45,23 @@ public class AuthenticateAction extends AbstractAction
 
 	public String authenticateUser()
 	{
-		loginManager.getList();
+		/*try
+		{
+			List<DrugItem> li = drugItemDAO.loadDrugItemByCategory("1");
+			System.out.println("List awaaaaaaaaaaaa");
+			System.out.println("List Size  " + li.size());
+			drugItemDAO.retrieveByQuaryString("SSSSSSSSSSSS");
+		}
+		catch(KilbeesRollbackException krbex)
+		{
+			System.out.println("EXCEPTION OCCURED IN NEW ITEM PROCESS   "+krbex.getMessage());
+		}
+		
+		loginManager.getList();*/
+		
 		try
 		{
-			category = loginManager.getCategory();
+			//category = loginManager.getCategory();
 			AuthenticatedUser au = loginManager.authenticateUser();
 			logger.info("Authenticate Successful In Login ction");
 			addSessionUserVariable(au);
@@ -75,9 +95,10 @@ public class AuthenticateAction extends AbstractAction
 	{
 		try 
 		{
-			category = loginManager.getCategory();
+			//category = loginManager.getCategory();
 			return SUCCESS;
-		} catch (KilbeesRollbackException e) {
+		/*} catch (KilbeesRollbackException e) {*/
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return LOGIN;
@@ -117,7 +138,7 @@ public class AuthenticateAction extends AbstractAction
 	//END : Validations----------------------------------------------------------------------------------------------------
 	
 	
-	//Getters & Setters----------------------------------------------------------------------------------------------------
+	//Getters & Setters (mainly for Strut2----------------------------------------------------------------------------------------------------
 	
 	
 	public IKILBEESLoginManager getKilbeesLoginManager() {
@@ -129,7 +150,7 @@ public class AuthenticateAction extends AbstractAction
 		this.loginManager = loginManager;
 	}
 	
-	public List<DrugCategory> getCollection() {
+	/*public List<DrugCategory> getCollection() {
 		return collection;
 	}
 
@@ -143,7 +164,7 @@ public class AuthenticateAction extends AbstractAction
 
 	public void setCategory(DrugCategory category) {
 		this.category = category;
-	}
+	}*/
 
 	
 	//END : Getters & Setters--------------------------------------------------------------------------------------------------

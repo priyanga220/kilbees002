@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+	
+	<package name="admin" namespace="/admin" extends="kilbees-default">
+		<action name="load-new-user-page" class="com.kilbees.struts2.action.admin.AdminAction" method="newUserPage" >
+				<result name="success">/WEB-INF/jsp/admin/newuser.jsp</result>
+				<result name="input">/WEB-INF/jsp/authentication/home.jsp</result>
+				<result name="error">/WEB-INF/jsp/error/runtimeerrorpage.jsp</result>
+		</action>
+    </package>
+</struts>

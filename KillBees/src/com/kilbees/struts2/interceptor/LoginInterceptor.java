@@ -48,6 +48,7 @@ public class LoginInterceptor implements Interceptor {
 			System.out.println("Sesion Object is NOT NULL AND INVOLKING ACTION");
 			if(!((AuthenticatedUser)sessionAtrri.get(SessionKey.SESSION_USER)).equals(null))
 			{
+				System.out.println("Involking the Action "+invocation.getAction().toString());
 				return invocation.invoke();
 			}
 			else
