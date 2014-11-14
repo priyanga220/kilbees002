@@ -22,8 +22,13 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "DRUG_ITEM")
-public class DrugItem implements java.io.Serializable {
+public class DrugItem extends DomainDefault implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String itemNo;
 	private DrugCategory drugCategory;
 	private String genericName;

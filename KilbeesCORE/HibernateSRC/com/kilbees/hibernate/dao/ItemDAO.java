@@ -15,16 +15,16 @@ import com.kilbees.bussiness.model.DrugItem;
 import com.kilbees.hibernate.idao.IItemDAO;
 
 @Repository
-public class ItemDAO implements IItemDAO 
+public class ItemDAO extends AbstractDao<DrugItem, String> implements IItemDAO 
 {
 	
-	private SessionFactory sessionFactory;
+	public SessionFactory sessionFactory;
 
 	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<DrugItem> getItemList()
 	{
-		Query query = sessionFactory.getCurrentSession().createQuery(	"from DrugItem it");
+		Query query = getSessionFactory().getCurrentSession().createQuery(	"from DrugItem it");
 		query.setCacheable(true); 
 		List<DrugItem> list = query.list();
 		return list;
@@ -34,7 +34,7 @@ public class ItemDAO implements IItemDAO
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<DrugItem> getItemList(int frm , int to)
 	{
-		Query query = sessionFactory.getCurrentSession().createQuery(	"from DrugItem it");
+		Query query = getSessionFactory().getCurrentSession().createQuery(	"from DrugItem it");
 		query.setCacheable(true); 
 		List<DrugItem> list = query.list();
 		return list;
@@ -44,7 +44,7 @@ public class ItemDAO implements IItemDAO
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int allItemCount()
 	{
-		Query query = sessionFactory.getCurrentSession().createQuery(	"select count(*) from DrugItem it");
+		Query query = getSessionFactory().getCurrentSession().createQuery(	"select count(*) from DrugItem it");
 		query.setCacheable(true); 
 		int count = ((Long)query.uniqueResult()).intValue();
 		System.out.println("Item Count   :  "+count);
@@ -55,7 +55,7 @@ public class ItemDAO implements IItemDAO
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<DrugCategory> getCategoryList()
 	{
-		Query query = sessionFactory.getCurrentSession().createQuery(	"from DrugCategory it");
+		Query query = getSessionFactory().getCurrentSession().createQuery(	"from DrugCategory it");
 		query.setCacheable(true); 
 		List<DrugCategory> list = query.list();
 		return list;
