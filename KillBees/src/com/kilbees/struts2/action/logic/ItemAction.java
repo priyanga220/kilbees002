@@ -12,6 +12,7 @@ public class ItemAction extends AbstractAction
 
 	public String viewFullItemList()
 	{
+		
 		return SUCCESS;
 	}
 	
