@@ -13,7 +13,13 @@
 	<div class=block> 
 		 
 		<div class=content style="margin: 0;" >  -->
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<div class=col-md-10> 
+			<div class=block>
+			<div class=content>
+			Haaka hakkaaaa
+			</div>
+			</div>
+	</div>
 	</div>
 </div>
 
