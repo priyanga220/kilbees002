@@ -7,13 +7,7 @@
 
 <jsp:body>
 <div id="body-session">
-	<div class=col-md-10> 
-			<div class=block>
-			<div class=content>
-			Haaka hakkaaaa
-			</div>
-			</div>
-	</div>
+	
 </div>			
 			<br/>
 			<%-- <s:url id="viewItemURL" action="view-full-item-list" namespace="/item" ></s:url>
